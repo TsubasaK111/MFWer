@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+{% block content%}
+  {% include "header.html" %}
+
+  <div class="row banner main">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 padding-none">
+      <h1>Create a New M◇W</h1>
+    </div>
+  </div>
+
+  {% include "flash.html" %}
+
+  <div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+      <form action = {{ url_for("MFW_new") }} method="POST" enctype="multipart/form-data">
+        <input name = "new_name" type = "text">
+        <input type = "submit" value = "create">
+      </form>
+    </div>
+  </div>
+
+  <div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+      <a href={{ url_for('MFW_browse') }} >return to M◇W browsing</a>
+    </div>
+  </div>
+
+{% endblock %}

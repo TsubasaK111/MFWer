@@ -1,0 +1,22 @@
+{% extends "default.html" %}
+{% block content %}
+	{% include "header.html" %}
+
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1 id='target1'>M◇Ws</h1>
+		</div>
+	</div>
+
+	{% include "flash.html" %}
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 MFW-list">
+			<h3>{{MFW.name}}</h3>
+			<p> M◇W_edit!!! </p>
+		</div>
+	</div>
+
+{% endblock %}

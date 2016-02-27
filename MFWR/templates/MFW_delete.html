@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+{% block content%}
+  {% include "header.html" %}
+
+  <div class="row banner main">
+    <div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+      <h1>Delete your MFW</h1>
+    </div>
+  </div>
+
+  {% include "flash.html" %}
+
+  <div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+      <form action = {{url_for('MFW_delete',MFW_id=MFW.id )}} method = 'POST' enctype = 'multipart/form-data'>
+          <p> Are you sure you want to delete {{MFW.name}}?</p>
+          <input type = 'submit' value = 'Delete'>
+      </form>
+    </div>
+  </div>
+
+  <div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+      <a href={{ url_for('showMenu', MFW_id=MFW.id) }} >return to MFW menu</a>
+    </div>
+  </div>
+
+{% endblock %}
