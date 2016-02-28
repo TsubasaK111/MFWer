@@ -1,0 +1,96 @@
+body {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #EEE;
+  color: #222;
+}
+
+h1 {
+  font-size: 6em;
+  color: #6A45E8;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+p {
+
+}
+
+form {
+
+}
+
+.hlgreen{
+  background-color: green;
+}
+.hlpink{
+  background-color: pink;
+}
+.hlyellow{
+  background-color: yellow;
+}
+
+.logo {
+  width: 150px;
+}
+
+.header {
+  background-color: #EEE;
+  color: #222;
+  margin: 30px 0;
+}
+
+.footer {
+    padding-top: 200px;
+    text-align: center;
+}
+
+.landing-punchline {
+  margin: 50px 0 0 30px;
+}
+
+.cta-buttons {
+  margin: 30px 0 0 0;
+}
+
+.fine-text{
+  color: #888;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.grey-text {
+  color: #999;
+}
+
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+}
+
+/* button styles */
+
+.btn {
+  color: #222;
+}
+
+.btn-about {
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-signin {
+  border-color: #6A45E8;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-cta {
+  background-color: #6A45E8;
+  color: #EEE;
+  font-size: 2em;
+}

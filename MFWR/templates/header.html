@@ -1,13 +1,21 @@
-<div class="row top-menu">
-	<div class="col-md-6">
-		<a href="{{url_for('MFW_browse')}}">
-			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All M◇WS
-		</a>
+<div class='container-fluid'>
+	<div class="header row">
+
+		<div class="col-md-2 col-sm-2 col-xs-4">
+			<a href="{{url_for('MFW_browse')}}">
+				<img class='btn logo img-responsive' src={{url_for('static', filename='images/MFW_logo.png')}}>
+			</a>
+		</div>
+
+		<div class="col-md-8 col-sm-6 col-xs-1"></div>
+
+		<div class="col-md-1 col-sm-2 col-xs-3 btn btn-about text-center">
+			<a class='grey-text' href={{url_for('landing')}}>about</a>
+		</div>
+
+		<div class="col-md-1 col-sm-2 col-xs-3 btn btn-signin text-center">
+			<a href="{{url_for('login')}}">sign in</a>
+		</div>
+
 	</div>
-	<div class="col-md-6 text-right">
-		<p><a href="{{url_for('login')}}">Log In </a></p>
-	</div>
-</div>
-<div class="row divider blue">
-	<div class="col-md-12"></div>
 </div>

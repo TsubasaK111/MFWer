@@ -1,29 +1,28 @@
 {% extends "default.html" %}
 {% block content %}
-	{% include "header.html" %}
 
 	<div class="row banner main">
-		<div class="col-md-1"></div>
-		<div class="col-md-11 padding-none">
-			<h1>M◇Ws</h1>
+		<div class="col-xs-1"></div>
+		<div class="col-xs-11 padding-none">
+			<h2>M□Ws</h2>
 		</div>
 	</div>
 
 	{% include "flash.html" %}
 
 	<div class="row padding-top padding-bottom">
-		<div class="col-md-1"></div>
-		<div class="col-md-10 padding-none">
-			<p>Create a <a href={{ url_for('MFW_new') }}>New</a> M◇W</p>
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10 padding-none">
+			<p>Create a <a href={{ url_for('MFW_new') }}>New</a> M□W</p>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-xs-1"></div>
 	</div>
 
 	{% for MFW in MFWs %}
 		<a href = "{{url_for('MFW_view', MFW_id = MFW.id)}}">
 			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-10 MFW-list">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10 MFW-list">
 					<h3>{{MFW.name}}</h3>
 				</div>
 			</div>

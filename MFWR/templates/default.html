@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- Online Roboto Font -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='animate.css') }}" type="text/css" media="screen" >
 
 		<!-- Bootstrap 3 Online -->
 		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<link rel="stylesheet" href="{{ url_for('static', filename='animate.css') }}" type="text/css" media="screen" >
-
 		<!-- Bootstrap 3 offline -->
-		<!-- <link rel=stylesheet type = text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-theme.min.css') }}" > -->
+		<!-- <link rel=stylesheet type = text/css href="{{ url_for('static', filename='bootstrap.min.css') }}"> -->
 
-		<title>{% block title %}{% endblock %} - M◇WR</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}" type="text/css" >
+
+		<title>{% block title %}{% endblock %} M□W</title>
 
 		{% block header %}
 		{% endblock %}
 
 	</head>
 	<body>
-		<div class="container">
+
+		<div class="container-fluid">
+			{% include "header.html" %}
 			{% block content %}
 			{% endblock %}
 		</div>
+
+		<div class='container'>
+			<div class='row footer text-center'>
+				<div class='fine-text'>
+					all rights reserved by M□W
+				</div>
+			</div>
+		</div>
+
 	</body>
 </html>
