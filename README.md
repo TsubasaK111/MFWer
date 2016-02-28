@@ -3,10 +3,7 @@
 
  Strategic, Powerful, Beautiful.
 
- Mental Frameworks are:
-  * Mnemonics,
-  * Describe a process, and
-  * Serve a time-critical purpose.
+ Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
 
 ##Installation:
  1. **Install all requirements.**
