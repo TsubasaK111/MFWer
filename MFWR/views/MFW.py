@@ -14,6 +14,11 @@ import pdb, pprint, inspect
 
 
 @app.route('/')
+@app.route('/landing')
+def landing():
+    """landing page for errbody!"""
+    return render_template( 'landing.html' )
+
 @app.route('/browse/')
 def MFW_browse():
     """tile styled page to display and browse MFWs"""
