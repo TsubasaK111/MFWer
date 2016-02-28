@@ -10,44 +10,54 @@
 
 {% block content %}
 
-  <div class="row top-menu">
-    <div class="col-xs-6">
-      <a href="{{url_for('MFW_browse')}}">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All MFWz
-      </a>
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-8">
+
+      <h2>
+        B M□WR NW
+      </h2>
+
+      <h3>
+        Sign Up to create your own Mental Frameworks and become a M□WR
+      </h3>
+
+      {% include "flash.html" %}
+
+      <div id="sessionDebug">
+        The current session state is {{ state }}
+      </div>
+
+      <!--  Google OAuth Button -->
+      <div id="signinButton">
+        <span class="g-signin"
+          data-scope="openid"
+          data-clientid='822238722978-knjfth8emcq1p7t1qb94vi63u5vbm7rk.apps.googleusercontent.com'
+          data-redirecturi="postmessage"
+          data-accesstype="offline"
+          data-cookiepolicy="single_host_origin"
+          data-callback="signInCallback"
+          data-approvalprompt="force">
+        </span>
+      </div>
+
+      <div id="result"></div>
+
+      <!-- Facebook OAuth Button. Uses the JavaScript SDK to present
+           graphical Login button that triggers FB.login() when clicked. -->
+      <div class="fb-login-button"
+        data-max-rows="1"
+        data-size="xlarge"
+        data-show-faces="false"
+        data-auto-logout-link="false">
+      </div>
+
+      <div id="status"></div>
+
     </div>
+
+    <div class="col-xs-3"></div>
   </div>
-  <div class="row divider blue">
-    <div class="col-xs-12"></div>
-  </div>
-
-	{% include "flash.html" %}
-
-  <div id="sessionDebug">
-    The current session state is {{ state }}
-  </div>
-
-  <!--  Google OAuth Button -->
-  <div id="signinButton">
-    <span class="g-signin"
-      data-scope="openid"
-      data-clientid='822238722978-knjfth8emcq1p7t1qb94vi63u5vbm7rk.apps.googleusercontent.com'
-      data-redirecturi="postmessage"
-      data-accesstype="offline"
-      data-cookiepolicy="single_host_origin"
-      data-callback="signInCallback"
-      data-approvalprompt="force">
-    </span>
-  </div>
-  <div id="result"></div>
-
-
-  <!-- Facebook OAuth Button. Uses the JavaScript SDK to present
-       graphical Login button that triggers FB.login() when clicked. -->
-  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-  </fb:login-button>
-
-  <div id="status"></div>
 
 
   <!--  Start Google OAuth -->
@@ -104,7 +114,6 @@
     function statusChangeCallback(response) {
       console.log('statusChangeCallback');
       console.log(response);
-
       // The response object is returned with a status field that lets the
       // app know the current login status of the person.
       // Full docs on the response object can be found in the documentation
@@ -115,12 +124,12 @@
       } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
+          'into this app.';
       } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+          'into Facebook.';
       }
     }
 
@@ -135,10 +144,10 @@
 
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '523665454488045',
-        cookie     : true, // enable cookies to allow server to access session
-        xfbml      : true, // parse social plugins on this page
-        version    : 'v2.2'// use version 2.2
+        appId      : '1730631620514152',
+        cookie     : true,  // enable cookies to allow server to access session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.5' // use graph api version 2.5
         });
 
       // Now that we've initialized the JavaScript SDK, we call
@@ -160,7 +169,7 @@
 
     // Immediately Invoked Function that loads SDK asynchronously
     (function(document, script, id) {
-      var js, fjs = document.getelementByTagName(script)[0];
+      var js, fjs = document.getElementsByTagName(script)[0];
       if (document.getElementById(id)) return;
       js = document.createElement(script); js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js";
