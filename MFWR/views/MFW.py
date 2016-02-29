@@ -43,6 +43,7 @@ def MFW_new():
             return logInRedirect()
         user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
 
+        pdb.set_trace()
         new_name = request.form['new_name']
         print "\nMFW_new POST triggered, name is: ", new_name
         MFW_new = MFW( name=new_name, creator_id = user_id )
