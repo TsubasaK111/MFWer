@@ -21,7 +21,7 @@ h3 {
 }
 
 p {
-
+  font-weight: 700;
 }
 
 form {
@@ -83,20 +83,58 @@ form {
 }
 
 .btn-about {
-  border-width: 5px;
+  border-width: 3px;
   border-style: solid;
 }
 
 .btn-signin {
   border-color: #6A45E8;
-  border-width: 5px;
+  border-width: 3px;
   border-style: solid;
 }
 
-.btn-cta {
+.btn-browse {
+  background-color: #AAA;
+  color: #EEE;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.btn-box {
+  width:  150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.btn-box-text{
+  font-size: 1.5em;
+  /*position: absolute;
+  top: 50%;
+  margin-top: -0.5em;*/
+  line-height: 140px;
+  text-align: center;
+  margin
+}
+
+.btn-small {
+  background-color: #6A45E8;
+  color: #EEE;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.btn-large {
   background-color: #6A45E8;
   color: #EEE;
   font-size: 2em;
+}
+
+.padding-top{
+  padding-top: 15px;
+}
+
+.padding-bottom{
+  padding-bottom: 15px;
 }
 
 #sessionDebug {

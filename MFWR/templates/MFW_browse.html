@@ -3,29 +3,41 @@
 
 	<div class="row banner main">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-11 padding-none">
+		<div class="col-xs-10">
 			<h2>M□Ws</h2>
 		</div>
+		<div class='col-xs-1'></div>
 	</div>
 
 	{% include "flash.html" %}
 
 	<div class="row padding-top padding-bottom">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-10 padding-none">
-			<p>Create a <a href={{ url_for('MFW_new') }}>New</a> M□W</p>
-		</div>
-		<div class="col-xs-1"></div>
-	</div>
 
-	{% for MFW in MFWs %}
-		<a href = "{{url_for('MFW_view', MFW_id = MFW.id)}}">
-			<div class="row">
-				<div class="col-xs-1"></div>
-				<div class="col-xs-10 MFW-list">
-					<h3>{{MFW.name}}</h3>
-				</div>
+		<div class="col-xs-1"></div>
+
+		<div class="col-xs-10">
+			<div class='row padding-bottom'>
+				{% for MFW in MFWs %}
+				<a href = "{{url_for('MFW_view', MFW_id = MFW.id)}}">
+					<div class="col-xs-3 btn btn-browse btn-box">
+						<div class='btn-box-text'>
+						{{MFW.name}}
+						</div>
+					</div>
+				</a>
+				<div class='col-xs-1'></div>
+				{% endfor %}
+				<a href="{{url_for('MFW_new')}}">
+					<div class="col-xs-3 btn btn-small btn-box">
+						<div class='btn-box-text'>
+							<i class="fa fa-plus"></i> create
+						</div>
+					</div>
+				</a>
 			</div>
-		</a>
-	{% endfor %}
+		</div>
+
+		<div class="col-xs-1"></div>
+
+	</div>
 {% endblock %}
