@@ -1,9 +1,9 @@
 {% extends "default.html" %}
 {% block content%}
 
-  <div class="row banner main">
+  <div class="row ">
     <div class="col-xs-1"></div>
-		<div class="col-xs-11 padding-none">
+		<div class="col-xs-11">
       <h2>Delete your MFW</h2>
     </div>
   </div>
@@ -12,18 +12,22 @@
 
   <div class="row padding-top padding-bottom">
     <div class="col-xs-1"></div>
-    <div class="col-xs-10 padding-none">
-      <form action = {{url_for('MFW_delete',MFW_id=MFW.id )}} method = 'POST' enctype = 'multipart/form-data'>
-          <p> Are you sure you want to delete {{MFW.name}}?</p>
-          <input type = 'submit' value = 'Delete'>
-      </form>
-    </div>
-  </div>
-
-  <div class="row padding-top padding-bottom">
-    <div class="col-xs-1"></div>
-    <div class="col-xs-10 padding-none">
-      <a href={{ url_for('showMenu', MFW_id=MFW.id) }} >return to MFW menu</a>
+    <div class="col-xs-9 col-sm-7 col-md-5">
+      <p> Are you sure you want to delete {{MFW.name}}?</p>
+      <div class='row'>
+        <div class='col-xs-4'>
+          <form action = {{url_for('MFW_delete',MFW_id=MFW.id )}} method = 'POST' enctype = 'multipart/form-data'>
+              <button type='submit' class='btn btn-block btn-danger'>Delete</button>
+          </form>
+          <div class='padding-top'>
+            <a href={{ url_for('MFW_browse') }}>
+              <div class="btn btn-block btn-signin">
+                Go Back
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

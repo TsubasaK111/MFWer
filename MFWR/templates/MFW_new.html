@@ -3,8 +3,26 @@
 
   <script>
     $(document).ready(function() {
-      // $('body').addClass('animated hinge');
+      $('#MFW_name').on('change', function(){
+        var MFW_name = $('#MFW_name').val();
+        console.log("MFW_name.length is: " + MFW_name.length);
+
+        $('#element_group').empty()
+
+        for( var i=0; i<MFW_name.length; i++){
+          var element_box =
+            `<div class='form-group'>
+               <div class='element-letter col-xs-3'>${MFW_name[i]}</div>
+               <div class='col-xs-9'>
+                 <input name='element${i}' id='element${i}' class='btn-block form-control form-control-medium' type='text'>
+               </div>
+             </div>`;
+          $('#element_group').append(element_box).animate();
+        }
+      });
     })
+    // $(document).
+
   </script>
 
   <div class="row banner main">
@@ -17,15 +35,29 @@
 
   <div class="row padding-bottom">
     <div class="col-xs-1"></div>
-    <div class="col-xs-10 padding-none">
-      <form action = {{ url_for("MFW_new") }} method="POST" enctype="multipart/form-data">
-        <input name = "new_name" type = "text">
-        <div>
-          <input class="btn btn-signin" type = "submit" value = "create">
+    <div class="col-xs-9 col-sm-7 col-md-5">
+
+      <form class='form-horizontal' role='form' action = {{ url_for("MFW_new") }} method="POST" enctype="multipart/form-data">
+        <div class='form-group'>
+          <div class='col-xs-12'>
+            <input name="new_name" id="MFW_name" class="form-control form-control-large margin-bottom-sm" type = "text">
+          </div>
+        </div>
+        <div id='element_group'>
+          <!-- Dynamic Form Insertion Here -->
+        </div>
+        <div class='form-group'>
+          <div class='col-xs-12'>
+            <button type='submit' class='btn btn-block btn-large'>create</button>
+          </div>
+          <!-- <div class='col-xs-6'>
+            <input class="btn btn-block btn-large" type = "submit" value = "create">
+          </div> -->
         </div>
       </form>
+
     </div>
-    <div class='col-xs-1'></div>
+    <div class='col-xs-2'></div>
   </div>
 
   <div class="row padding-top padding-bottom">

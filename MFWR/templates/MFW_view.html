@@ -1,21 +1,37 @@
 {% extends "default.html" %}
 {% block content %}
 
-	<div class="row banner main">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-11 padding-none">
-			<h2 id='target1'>M□Ws</h2>
-		</div>
-	</div>
 
-	{% include "flash.html" %}
-
-	<div class="row">
+	<div class="row ">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-10 MFW-list">
-			<h3>{{MFW.name}}</h3>
-			<p> M□W_view!!! </p>
+		<div class="col-xs-9 col-sm-7 col-md-5">
+			<h2>{{MFW.name}}</h2>
+			{% include "flash.html" %}
+			<div class='row margin-top'>
+				<div class="col-xs-4">
+					<a href={{ url_for('MFW_browse') }} >
+						<div class=" btn btn-block btn-signin">
+		        	See All
+		      	</div>
+					</a>
+				</div>
+				<div class="col-xs-4">
+					<a href={{ url_for('MFW_edit',MFW_id=MFW.id) }}>
+						<div class="btn btn-block btn-warning">
+							Edit
+						</div>
+					</a>
+				</div>
+				<div class="col-xs-4">
+	        <a href={{ url_for('MFW_delete',MFW_id=MFW.id) }}>
+						<div class="btn btn-block btn-danger">
+							Delete
+						</div>
+					</a>
+				</div>
+			</div>
 		</div>
+		<div class='col-xs-1'></div>
 	</div>
 
 {% endblock %}

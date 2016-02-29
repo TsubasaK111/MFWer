@@ -8,6 +8,12 @@
   </script>
 {% endblock %}
 
+{% block footer %}
+  <div id="sessionDebug">
+    The current session state is {{ state }}
+  </div>
+{% endblock %}
+
 {% block content %}
 
   <div class="row">
@@ -24,10 +30,6 @@
 
       {% include "flash.html" %}
 
-      <div id="sessionDebug">
-        The current session state is {{ state }}
-      </div>
-
       <!--  Google OAuth Button -->
       <div id="signinButton">
         <span class="g-signin"
@@ -41,18 +43,19 @@
         </span>
       </div>
 
-      <div id="result"></div>
-
       <!-- Facebook OAuth Button. Uses the JavaScript SDK to present
            graphical Login button that triggers FB.login() when clicked. -->
       <div class="fb-login-button"
         data-max-rows="1"
-        data-size="large"
+        data-size="xlarge"
         data-show-faces="false"
         data-auto-logout-link="false">
       </div>
 
-      <div id="status"></div>
+      <div class='margin-top'>
+        <p id="result"></div>
+        <p id="status"></div>
+      </div>
 
     </div>
 
