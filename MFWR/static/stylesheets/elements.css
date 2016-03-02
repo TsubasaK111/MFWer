@@ -1,0 +1,25 @@
+body {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #EEE;
+  color: #222;
+}
+
+h1 {
+  font-size: 6em;
+  color: #6A45E8;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+p {
+  font-weight: 500;
+}

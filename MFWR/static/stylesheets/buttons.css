@@ -1,0 +1,59 @@
+.btn {
+  color: #222;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-about {
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-signin {
+  border-color: #6A45E8;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-browse {
+  background-color: #AAA;
+  color: #EEE;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.btn-small {
+  background-color: #6A45E8;
+  color: #EEE;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.btn-medium {
+  border-width: 0px;
+  background-color: #6A45E8;
+  color: #EEE;
+  font-size: 1em;
+}
+
+.btn-large {
+  border-width: 0px;
+  background-color: #6A45E8;
+  color: #EEE;
+  font-size: 2em;
+}
+
+.btn-box {
+  width:  150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.btn-box-text{
+  font-size: 1.5em;
+  /*position: absolute;
+  top: 50%;
+  margin-top: -0.5em;*/
+  line-height: 140px;
+  text-align: center;
+}

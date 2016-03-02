@@ -1,0 +1,70 @@
+.logo {
+  width: 150px;
+}
+
+.header {
+  background-color: #EEE;
+  color: #222;
+  margin: 30px 0;
+}
+
+.footer {
+    padding-top: 200px;
+    text-align: center;
+}
+
+.landing-punchline {
+  margin: 50px 0 0 15px;
+}
+
+.cta-buttons {
+  margin: 30px 0 0 0;
+}
+
+.fine-text{
+  color: #888;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.grey-text {
+  color: #999;
+}
+
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+}
+
+.padding-top{
+  padding-top: 15px;
+}
+
+.padding-bottom{
+  padding-bottom: 15px;
+}
+
+.margin-top{
+  margin-top: 40px;
+}
+
+.margin-bottom{
+  margin-bottom: 40px;
+}
+
+.margin-bottom-sm{
+  margin-bottom: 20px;
+}
+
+.margin-horizontal{
+  margin-left:  20px;
+  margin-right: 20px;
+}
+
+.element-letter{
+  color: #6A45E8;
+  font-size: 3em;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
