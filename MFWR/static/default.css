@@ -126,7 +126,6 @@ p {
   margin-top: -0.5em;*/
   line-height: 140px;
   text-align: center;
-  margin
 }
 
 .padding-top{
@@ -180,4 +179,45 @@ p {
 
 #sessionDebug {
   margin: 0 0 10px 0;
+}
+
+@-webkit-keyframes swivelIn {
+  from {
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: rotate3d(0, 0, 1, -90deg);
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes swivelIn {
+  from {
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: rotate3d(0, 0, 1, -90deg);
+    transform: rotate3d(0, 0, 1, -90deg);
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.swivelIn {
+  -webkit-animation-name: swivelIn;
+  animation-name: swivelIn;
 }
