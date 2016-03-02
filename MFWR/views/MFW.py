@@ -45,6 +45,14 @@ def MFW_new():
 
         pdb.set_trace()
         new_name = request.form['new_name']
+
+        # i = 0
+        # err = false
+        # while err = false:
+        #     try:
+        #         i++
+        #     except:
+
         print "\nMFW_new POST triggered, name is: ", new_name
         MFW_new = MFW( name=new_name, creator_id = user_id )
         session.add(MFW_new)
