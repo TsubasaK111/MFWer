@@ -7,6 +7,16 @@
 		<div class="col-xs-9 col-sm-7 col-md-5">
 			<h2>{{MFW.name}}</h2>
 			{% include "flash.html" %}
+
+			{% for element in elements %}
+				<div class='row'>
+					<div class='element-letter col-xs-3'>{{element.letter}}</div>
+					 <div class='col-xs-9 elements'>
+						 {{element.description}}
+					 </div>
+			  </div>
+			 {% endfor %}
+
 			<div class='row margin-top'>
 				<div class="col-xs-4">
 					<a href={{ url_for('MFW_browse') }} >

@@ -30,7 +30,11 @@ def MFW_browse():
 def MFW_view(MFW_id):
     """view the full details of a MFW"""
     thisMFW = session.query(MFW).filter_by(id = MFW_id).first()
-    return render_template( 'MFW_view.html', MFW=thisMFW )
+    theseElements = session.query(Element).filter_by(MFW_id=MFW_id).order_by(Element.order).all()
+    pdb.set_trace()
+    return render_template( 'MFW_view.html',
+                            MFW=thisMFW,
+                            elements=theseElements )
 
 
 @app.route('/create/', methods=['GET', 'POST'])
@@ -57,7 +61,6 @@ def MFW_create():
                 break
         new_MFW = MFW( name=new_MFW_name, creator_id = user_id )
         session.add(new_MFW)
-        pdb.set_trace()
         session.commit()
         for new_element in new_elements:
             element = Element( letter=new_element['letter'],
