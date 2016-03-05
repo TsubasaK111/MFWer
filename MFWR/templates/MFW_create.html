@@ -11,12 +11,13 @@
 
         $('#element_group').empty().hide()
 
-        for( var i=0; i<MFW_name.length; i++){
+        for( var i=0; i<MFW_name.length; i++ ){
           var element_box =
             `<div class='form-group'>
                <div class='element-letter col-xs-3'>${MFW_name[i]}</div>
+               <input name='element${i}-letter' type=hidden value=${MFW_name[i]}></input>
                <div class='col-xs-9 elements'>
-                 <input name='element${i}' id='element${i}' class='btn-block form-control form-control-medium' type='text'>
+                 <input name='element${i}-description' value='${MFW_name[i]}'class='btn-block form-control form-control-medium' type='text'>
                </div>
              </div>`;
           $('#element_group').append(element_box)
@@ -34,7 +35,7 @@
   <div class="row banner main">
     <div class="col-xs-1"></div>
     <div class="col-xs-11 padding-none">
-      <h2>Create a New M□FFFW</h2>
+      <h2>Create a New M□W</h2>
       {% include "flash.html" %}
     </div>
   </div>
@@ -43,10 +44,10 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-9 col-sm-7 col-md-5">
 
-      <form class='form-horizontal' role='form' action = {{ url_for("MFW_new") }} method="POST" enctype="multipart/form-data">
+      <form class='form-horizontal' role='form' action = {{ url_for("MFW_create") }} method="POST" enctype="multipart/form-data">
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="new_name" id="MFW_name" class="form-control form-control-large margin-bottom-sm" type = "text">
+            <input name="new_MFW_name" id="MFW_name" class="form-control form-control-large margin-bottom-sm" type = "text">
           </div>
         </div>
         <div id='element_group'>

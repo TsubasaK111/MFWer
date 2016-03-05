@@ -33,10 +33,11 @@ class MFW(Base):
             'creator_id': self.creator_id
         }
 
-class element(Base):
+class Element(Base):
     __tablename__ = 'element'
     letter        = Column( String(1), nullable = False )
     description   = Column( String(250) )
+    order         = Column( Integer )
     id            = Column( Integer, primary_key = True )
     MFW_id = Column( Integer, ForeignKey('MFW.id') )
     MFW    = relationship(MFW)
@@ -47,7 +48,7 @@ class element(Base):
         return { 'letter': self.letter,
                  'id': self.id,
                  'description': self.description,
-                 'framework_id': self.framework_id
+                 'MFW_id': self.MFW_id
                 }
 
 

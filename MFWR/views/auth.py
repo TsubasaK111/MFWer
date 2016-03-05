@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, jso
 from MFWR import app
 
 # Database Dependencies
-from MFWR.models import session, User, MFW, element
+from MFWR.models import session, User
 
 # Authentication Dependencies
 from flask import session as flask_session

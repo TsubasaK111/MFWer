@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, jso
 from MFWR import app
 
 # Database Dependencies
-from MFWR.models import session, MFW, element
+from MFWR.models import session, MFW, Element
 
 # Auth Dependencies
 from auth import *
@@ -26,12 +26,12 @@ def newElement(MFW_id):
         return redirect(url_for("publicMenu",MFW_id = MFW_id))
 
     if request.method == "POST":
-        new_name = request.form['new_name']
-        print "\nnewElement POST triggered, name is: ", new_name
-        newElement = element( name=new_name, MFW_id=MFW.id )
+        new_MFW_name = request.form['new_MFW_name']
+        print "\nnewElement POST triggered, name is: ", new_MFW_name
+        newElement = element( name=new_MFW_name, MFW_id=MFW.id )
         session.add(newElement)
         session.commit()
-        flash( "new item '" + new_name + "' created!")
+        flash( "new item '" + new_MFW_name + "' created!")
         print "POST worked!"
         return redirect(url_for("showMenu", MFW_id=MFW.id))
 
@@ -59,10 +59,12 @@ def showMenu(MFW_id):
 
     if 'access_token' not in flask_session:
         return logInRedirect()
+    
     MFW = session.query(MFW).filter_by(id = MFW_id).first()
     user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
+
     if not MFW.user_id == user_id:
-        return redirect(url_for("publicMenu",MFW_id = MFW_id))
+        return redirect( url_for("publicMenu",MFW_id = MFW_id) )
 
     elements = session.query(element).filter_by(MFW_id = MFW_id)
     creator = getUserInfo(MFW.user_id)

@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, jso
 from MFWR import app
 
 # Database Dependencies
-from MFWR.models import session, MFW, element
+from MFWR.models import session, MFW, Element
 
 # Auth Dependencies
 from auth import *
@@ -34,36 +34,47 @@ def MFW_view(MFW_id):
     return render_template( 'MFW_view.html', MFW=thisMFW )
 
 
-@app.route('/new/', methods=['GET', 'POST'])
-def MFW_new():
+@app.route('/create/', methods=['GET', 'POST'])
+def MFW_create():
     """page to create a new Mental Framework."""
 
     if request.method == "POST":
         if 'access_token' not in flask_session:
             return logInRedirect()
-        user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
-
-        pdb.set_trace()
-        new_name = request.form['new_name']
-
-        # i = 0
-        # err = false
-        # while err = false:
-        #     try:
-        #         i++
-        #     except:
-
-        print "\nMFW_new POST triggered, name is: ", new_name
-        MFW_new = MFW( name=new_name, creator_id = user_id )
-        session.add(MFW_new)
+        user_id = getUserId(
+                      flask_session['email'],flask_session['google_plus_id'] )
+        new_MFW_name = request.form['new_MFW_name']
+        new_elements = []
+        i = 0
+        while i < 20:
+            try:
+                new_elements.append(
+                  { 'letter':      request.form['element'+str(i)+'-letter'],
+                    'description': request.form['element'+str(i)+'-description'],
+                    'order':       i
+                  })
+                i = i + 1
+            except:
+                break
+        new_MFW = MFW( name=new_MFW_name, creator_id = user_id )
+        session.add(new_MFW)
         session.commit()
-        flash( "new MFW '" + new_name + "' created!")
-        print "POST worked!"
-
+        pdb.set_trace()
+        for new_element in new_elements:
+            element = Element( letter=new_element['letter'],
+                               description=new_element['description'],
+                               order=new_element['order'] )
+            session.add(element)
+        flash( "new MFW '" + new_MFW_name + "' created!" )
+        print "\nnew_MFW POST triggered, name is: ", new_MFW_name
         return redirect(url_for("MFW_browse"))
 
     else:
-        return render_template('MFW_new.html')
+        if 'access_token' not in flask_session:
+            return logInRedirect()
+        user_id = getUserId(
+                      flask_session['email'],flask_session['google_plus_id'] )
+        return render_template('MFW_create.html')
 
 
 @app.route('/<int:MFW_id>/edit/', methods=['GET', 'POST'])
@@ -91,7 +102,7 @@ def MFW_edit(MFW_id):
                                  )
         session.commit()
         flash( "item '" +  old_name + "' edited to '" + edited_name + "'. Jawohl!")
-        return redirect( url_for("showMenu", MFW_id=MFW_id) )
+        return redirect( url_for("MFW_view", MFW_id=MFW_id) )
 
     else:
         elements = session.query(element).filter_by(id = MFW_id).all()
@@ -112,7 +123,7 @@ def MFW_delete(MFW_id):
 
     if not thisMFW.creator_id == user_id:
         flash("Only MFW owners can delete MFWs.")
-        return redirect(url_for("MFW_view",MFW_id = MFW_id))
+        return redirect(url_for("MFW_view", MFW_id = MFW_id))
 
     if request.method == "POST":
         print "\nMFW_delete POST triggered!"
