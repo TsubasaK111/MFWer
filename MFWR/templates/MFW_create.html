@@ -3,14 +3,10 @@
 
   <script>
     $(document).ready(function() {
-      $('body').addClass('hinge');
-
       $('#MFW_name').on('change', function(){
         var MFW_name = $('#MFW_name').val();
         console.log("MFW_name.length is: " + MFW_name.length);
-
         $('#element_group').empty().hide()
-
         for( var i=0; i<MFW_name.length; i++ ){
           var element_box =
             `<div class='form-group'>
@@ -24,12 +20,9 @@
         }
         $('.elements').hide()
         $('#element_group').show().addClass('animated swivelIn');
-        $('.elements').delay(800).fadeIn();
-        // $('.elements').delay(800).show().addClass('animated slideInLeft');
+        $('.elements').delay(500).fadeIn();
       });
-
     })
-
   </script>
 
   <div class="row banner main">
@@ -57,9 +50,6 @@
           <div class='col-xs-12'>
             <button type='submit' class='btn btn-block btn-large'>create</button>
           </div>
-          <!-- <div class='col-xs-6'>
-            <input class="btn btn-block btn-large" type = "submit" value = "create">
-          </div> -->
         </div>
       </form>
 
