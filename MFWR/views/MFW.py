@@ -99,13 +99,17 @@ def MFW_edit(MFW_id):
 
     if request.method == "POST":
         edited_name = request.form['edited_name']
+        edited_description = request.form['edited_description']
         print "\nMFW_edit POST triggered, name is: ", edited_name
+
         old_name = session.query(MFW).filter_by(id = MFW_id).first().name
 
         result = session.execute(""" UPDATE MFW
                                      SET name=:edited_name
+                                         description=:edited_description
                                      WHERE id=:MFW_id; """,
                                  { "edited_name": edited_name,
+                                   "edited_description": edited_description,
                                    "MFW_id": MFW_id }
                                  )
         session.commit()
