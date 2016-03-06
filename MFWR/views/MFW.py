@@ -47,7 +47,7 @@ def MFW_create():
                       flask_session['email'],flask_session['google_plus_id'] )
         MFW_name = request.form['MFW_name']
         MFW_description = request.form['MFW_description']
-        new_MFW = MFW( name = MFW_name, 
+        new_MFW = MFW( name = MFW_name,
                        description = MFW_description,
                        creator_id = user_id )
         session.add(new_MFW)
@@ -106,14 +106,14 @@ def MFW_edit(MFW_id):
                                      SET name=:edited_name
                                      WHERE id=:MFW_id; """,
                                  { "edited_name": edited_name,
-                                   "MFW_id": menu_id }
+                                   "MFW_id": MFW_id }
                                  )
         session.commit()
         flash( "item '" +  old_name + "' edited to '" + edited_name + "'. Jawohl!")
         return redirect( url_for("MFW_view", MFW_id=MFW_id) )
 
     else:
-        elements = session.query(element).filter_by(id = MFW_id).all()
+        elements = session.query(Element).filter_by(id = MFW_id).all()
         return render_template( 'MFW_edit.html',
                                 MFW = MFW,
                                 elements = elements )
