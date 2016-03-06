@@ -26,12 +26,12 @@ def newElement(MFW_id):
         return redirect(url_for("publicMenu",MFW_id = MFW_id))
 
     if request.method == "POST":
-        new_MFW_name = request.form['new_MFW_name']
-        print "\nnewElement POST triggered, name is: ", new_MFW_name
-        newElement = element( name=new_MFW_name, MFW_id=MFW.id )
+        MFW_name = request.form['MFW_name']
+        print "\nnewElement POST triggered, name is: ", MFW_name
+        newElement = element( name=MFW_name, MFW_id=MFW.id )
         session.add(newElement)
         session.commit()
-        flash( "new item '" + new_MFW_name + "' created!")
+        flash( "new item '" + MFW_name + "' created!")
         print "POST worked!"
         return redirect(url_for("showMenu", MFW_id=MFW.id))
 

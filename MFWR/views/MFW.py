@@ -45,7 +45,7 @@ def MFW_create():
             return logInRedirect()
         user_id = getUserId(
                       flask_session['email'],flask_session['google_plus_id'] )
-        new_MFW_name = request.form['new_MFW_name']
+        MFW_name = request.form['MFW_name']
         new_elements = []
         i = 0
         while i < 20:
@@ -58,7 +58,7 @@ def MFW_create():
                 i = i + 1
             except:
                 break
-        new_MFW = MFW( name=new_MFW_name, creator_id = user_id )
+        new_MFW = MFW( name=MFW_name, creator_id = user_id )
         session.add(new_MFW)
         session.commit()
         for new_element in new_elements:
@@ -68,8 +68,8 @@ def MFW_create():
                                MFW_id=new_MFW.id )
             session.add(element)
         session.commit()
-        flash( "new MFW '" + new_MFW_name + "' created!" )
-        print "\nnew_MFW POST triggered, name is: ", new_MFW_name
+        flash( "new MFW '" + MFW_name + "' created!" )
+        print "\nnew_MFW POST triggered, name is: ", MFW_name
         return redirect(url_for("MFW_browse"))
 
     else:
