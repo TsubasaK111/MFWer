@@ -64,7 +64,18 @@
 .element-letter{
   color: #6A45E8;
   font-size: 3em;
-  text-align: center;
+  text-align: left;
   padding: 0;
   margin: 0;
+  font-weight: 700;
+  letter-spacing: .7em;
+}
+
+.element-letter-align-left{
+  color: #6A45E8;
+  font-size: 3em;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
 }

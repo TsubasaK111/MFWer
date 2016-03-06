@@ -46,6 +46,13 @@ def MFW_create():
         user_id = getUserId(
                       flask_session['email'],flask_session['google_plus_id'] )
         MFW_name = request.form['MFW_name']
+        MFW_description = request.form['MFW_description']
+        new_MFW = MFW( name = MFW_name, 
+                       description = MFW_description,
+                       creator_id = user_id )
+        session.add(new_MFW)
+        session.commit()
+
         new_elements = []
         i = 0
         while i < 20:
@@ -58,9 +65,7 @@ def MFW_create():
                 i = i + 1
             except:
                 break
-        new_MFW = MFW( name=MFW_name, creator_id = user_id )
-        session.add(new_MFW)
-        session.commit()
+
         for new_element in new_elements:
             element = Element( letter=new_element['letter'],
                                description=new_element['description'],
