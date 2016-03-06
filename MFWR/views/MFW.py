@@ -31,7 +31,6 @@ def MFW_view(MFW_id):
     """view the full details of a MFW"""
     thisMFW = session.query(MFW).filter_by(id = MFW_id).first()
     theseElements = session.query(Element).filter_by(MFW_id=MFW_id).order_by(Element.order).all()
-    pdb.set_trace()
     return render_template( 'MFW_view.html',
                             MFW=thisMFW,
                             elements=theseElements )
@@ -68,6 +67,7 @@ def MFW_create():
                                order=new_element['order'],
                                MFW_id=new_MFW.id )
             session.add(element)
+        session.commit()
         flash( "new MFW '" + new_MFW_name + "' created!" )
         print "\nnew_MFW POST triggered, name is: ", new_MFW_name
         return redirect(url_for("MFW_browse"))

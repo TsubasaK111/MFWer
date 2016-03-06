@@ -18,11 +18,13 @@ class User(Base):
 
 class MFW(Base):
     __tablename__ = 'MFW'
-    name         = Column( String(80), nullable = False )
+    name          = Column( String(80), nullable = False )
     description   = Column( String(100) )
     id            = Column( Integer, primary_key = True )
     creator_id    = Column( Integer, ForeignKey('user.id'), nullable = False )
-    user          = relationship(User)
+    user          = relationship("User")
+    element       = relationship( "Element", backref="MFW" )
+
     @property
     def serialize(self):
         #Returns object data in easily serializeable format.
@@ -39,8 +41,8 @@ class Element(Base):
     description   = Column( String(250) )
     order         = Column( Integer )
     id            = Column( Integer, primary_key = True )
-    MFW_id = Column( Integer, ForeignKey('MFW.id') )
-    MFW    = relationship(MFW)
+    MFW_id        = Column( Integer, ForeignKey('MFW.id') )
+    # MFW           = relationship("MFW")
 
     @property
     def serialize(self):
