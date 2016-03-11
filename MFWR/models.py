@@ -21,6 +21,8 @@ class MFW(Base):
     name          = Column( String(80), nullable = False )
     description   = Column( String(100) )
     id            = Column( Integer, primary_key = True )
+    image_url     = Column( String(200) )
+    reference_url = Column( String(200) )
     creator_id    = Column( Integer, ForeignKey('user.id'), nullable = False )
     user          = relationship("User")
     element       = relationship( "Element", backref="MFW" )
@@ -32,7 +34,9 @@ class MFW(Base):
             'name': self.name,
             'description': self.description,
             'id': self.id,
-            'creator_id': self.creator_id
+            'creator_id': self.creator_id,
+            'image_url': self.image_url,
+            'reference_url': self.reference_url
         }
 
 class Element(Base):
@@ -41,8 +45,8 @@ class Element(Base):
     description   = Column( String(250) )
     order         = Column( Integer )
     id            = Column( Integer, primary_key = True )
+    # image_url     = Column( String(200) )
     MFW_id        = Column( Integer, ForeignKey('MFW.id') )
-    # MFW           = relationship("MFW")
 
     @property
     def serialize(self):
