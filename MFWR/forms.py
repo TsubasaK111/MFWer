@@ -1,19 +1,21 @@
 from wtforms import Form, BooleanField, StringField, DateField, IntegerField, DecimalField, validators
 
 class MFWForm(Form):
-    name = StringField( "Name",
-                        [ validators.InputRequired(),
-                          validators.Length(min=2, max=50) ] )
-    gender = StringField("Gender", [validators.Length(min=4, max=7)])
-    weight = StringField("Weight")
-    dateOfBirth = DateField("Date of Birth", format='%m/%d/%y')
-    # shelter = StringField( "Sheltered in:",
-    #                        [validators.InputRequired()] )
-    shelter_id = IntegerField( "Sheltered in:",
-                               [validators.InputRequired()])
+    name =        StringField( "Name",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=2, max=20) ] )
+    description = StringField( "Description",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=2, max=100) ] )
+    id =          IntegerField( "MFW_ID" )
 
-
-class ShelterForm(Form):
-    name = StringField( "Shelter Name", [ validators.InputRequired(),
-                                          validators.Length(min=10, max=50) ])
-    id = IntegerField( "Shelter ID" )
+class ElementForm(Form):
+    letter =      StringField( "Letter",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=1, max=1) ] )
+    description = StringField( "Description",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=2, max=100) ] )
+    order =       IntegerField("Order",
+                               [ validators.InputRequired() ] )
+    id =          IntegerField("element_ID" )
