@@ -6,6 +6,9 @@ from MFWR import app
 # Database Dependencies
 from MFWR.models import session, MFW, Element
 
+# WTForm Dependencies
+from MFWR.forms import *
+
 # Auth Dependencies
 from auth import *
 
@@ -18,6 +21,7 @@ import pdb, pprint, inspect
 def landing():
     """landing page for errbody!"""
     return render_template( 'landing.html' )
+
 
 @app.route('/browse/')
 def MFW_browse():
@@ -39,17 +43,22 @@ def MFW_view(MFW_id):
 @app.route('/create/', methods=['GET', 'POST'])
 def MFW_create():
     """page to create a new Mental Framework."""
-
-    if request.method == "POST":
+    form = MFWForm(request.form)
+    if request.method == "POST" and form.validate():
+        # pdb.set_trace()
         if 'access_token' not in flask_session:
             return logInRedirect()
         user_id = getUserId(
                       flask_session['email'],flask_session['google_plus_id'] )
         MFW_name = request.form['MFW_name']
         MFW_description = request.form['MFW_description']
+        image_url = request.form['image_url']
+        reference_url = request.form['reference_url']
         new_MFW = MFW( name = MFW_name,
                        description = MFW_description,
-                       creator_id = user_id )
+                       creator_id = user_id,
+                       image_url = image_url,
+                       reference_url = reference_url )
         session.add(new_MFW)
         session.commit()
 

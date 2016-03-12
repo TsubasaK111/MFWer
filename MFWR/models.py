@@ -18,7 +18,7 @@ class User(Base):
 
 class MFW(Base):
     __tablename__ = 'MFW'
-    name          = Column( String(80), nullable = False )
+    name          = Column( String(20), nullable = False )
     description   = Column( String(100) )
     id            = Column( Integer, primary_key = True )
     image_url     = Column( String(200) )
@@ -32,8 +32,8 @@ class MFW(Base):
         #Returns object data in easily serializeable format.
         return {
             'name': self.name,
-            'description': self.description,
             'id': self.id,
+            'description': self.description,
             'creator_id': self.creator_id,
             'image_url': self.image_url,
             'reference_url': self.reference_url
