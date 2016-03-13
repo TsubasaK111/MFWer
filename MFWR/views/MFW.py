@@ -1,10 +1,14 @@
 # Webserver Dependencies
-from flask import Flask, render_template, url_for, request, redirect, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
 from MFWR import app
 
 # Database Dependencies
 from MFWR.models import session, MFW, Element
+
+# Image Upload Dependencies
+import os
+from werkzeug import secure_filename
 
 # WTForm Dependencies
 from MFWR.forms import *
@@ -15,6 +19,11 @@ from auth import *
 # Debugging Dependencies
 import pdb, pprint, inspect
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+    return '.' in filename and  \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @app.route('/')
 @app.route('/landing')

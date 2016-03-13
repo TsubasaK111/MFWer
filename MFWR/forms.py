@@ -1,5 +1,6 @@
 from wtforms import Form, BooleanField, StringField, DateField, IntegerField, DecimalField, validators
 
+
 class MFWForm(Form):
     MFW_name =          StringField( "Name",
                                  [ validators.InputRequired(),
