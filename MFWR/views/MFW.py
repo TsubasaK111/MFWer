@@ -27,9 +27,10 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+@app.route('/uploads/images/<filename>')
+def uploaded_image(filename):
+    print "uploaded_image triggered!"
+    return send_from_directory(os.getcwd() + app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/')
 @app.route('/landing')
@@ -74,15 +75,16 @@ def MFW_create():
                        creator_id = user_id,
                        image_url = image_url,
                        reference_url = reference_url )
-        session.add( new_MFW )
-        session.commit()
 
-        pdb.set_trace()
         file = request.files['image_file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.getcwd() + os.path.join( app.config['UPLOAD_FOLDER'],
                                                   filename ))
+            new_MFW.image_url = url_for('uploaded_image', filename=filename)
+
+        session.add( new_MFW )
+        session.commit()
 
         new_elements = []
         i = 0
