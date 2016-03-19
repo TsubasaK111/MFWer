@@ -1,5 +1,5 @@
 # Webserver Dependencies
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_from_directory
 
 from MFWR import app
 
@@ -19,11 +19,17 @@ from auth import *
 # Debugging Dependencies
 import pdb, pprint, inspect
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg', 'gif',
+                           'PNG', 'JPG', 'JPEG', 'GIF' ])
 
 def allowed_file(filename):
     return '.' in filename and  \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/')
 @app.route('/landing')
@@ -53,8 +59,8 @@ def MFW_view(MFW_id):
 def MFW_create():
     """page to create a new Mental Framework."""
     form = MFWForm(request.form)
-    if request.method == "POST" and form.validate():
-        # pdb.set_trace()
+    # if request.method == "POST" and form.validate():
+    if request.method == "POST":
         if 'access_token' not in flask_session:
             return logInRedirect()
         user_id = getUserId(
@@ -68,8 +74,15 @@ def MFW_create():
                        creator_id = user_id,
                        image_url = image_url,
                        reference_url = reference_url )
-        session.add(new_MFW)
+        session.add( new_MFW )
         session.commit()
+
+        pdb.set_trace()
+        file = request.files['image_file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.getcwd() + os.path.join( app.config['UPLOAD_FOLDER'],
+                                                  filename ))
 
         new_elements = []
         i = 0

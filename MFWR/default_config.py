@@ -1,6 +1,6 @@
 SECRET_KEY = "NOT_SO_SECRET_KEY"
 DEBUG = True
-UPLOAD_FOLDER = "/uploads/images"
+UPLOAD_FOLDER = "/MFWR/uploads/images"
 
 # SERVER_NAME = "0.0.0.0"
 # SERVER_PORT = 5001

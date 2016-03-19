@@ -12,6 +12,10 @@ __pycache__/
 *.py[cod]
 *.pyc
 
+# File Uploads by users, including images
+
+*/uploads/*
+
 # C extensions
 *.so
 
