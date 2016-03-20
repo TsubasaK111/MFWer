@@ -4,11 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from MFWR import app
 
 # Database Dependencies
-from MFWR.models import session, MFW, Element
-
-# Image Upload Dependencies
-import os
-from werkzeug import secure_filename
+from MFWR.models import session, Category, MFW, Element
 
 # WTForm Dependencies
 from MFWR.forms import *
@@ -16,21 +12,12 @@ from MFWR.forms import *
 # Auth Dependencies
 from auth import *
 
+# Image Upload Dependencies
+from upload import *
+
 # Debugging Dependencies
-import pdb, pprint, inspect
+import pdb, inspect
 
-ALLOWED_EXTENSIONS = set([ 'png', 'jpg', 'jpeg', 'gif',
-                           'PNG', 'JPG', 'JPEG', 'GIF' ])
-
-def allowed_file(filename):
-    return '.' in filename and  \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-
-@app.route('/uploads/images/<filename>')
-def uploaded_image(filename):
-    print "uploaded_image triggered!"
-    return send_from_directory(os.getcwd() + app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/')
 @app.route('/landing')
@@ -75,14 +62,11 @@ def MFW_create():
                        creator_id = user_id,
                        image_url = image_url,
                        reference_url = reference_url )
-
-        file = request.files['image_file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.getcwd() + os.path.join( app.config['UPLOAD_FOLDER'],
-                                                  filename ))
-            new_MFW.image_url = url_for('uploaded_image', filename=filename)
-
+        # store image to configured location and return url.
+        # if no file, keep user input image_url.
+        uploaded_image = upload_image(request.files['image_file'])
+        if uploaded_image:
+            new_MFW.image_url = uploaded_image
         session.add( new_MFW )
         session.commit()
 
