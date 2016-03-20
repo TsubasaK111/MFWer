@@ -1,0 +1,42 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+	<div class="row banner main">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<h2>C4tegories</h2>
+			{% include "flash.html" %}
+		</div>
+		<div class='col-xs-1'></div>
+	</div>
+
+	<div class="row padding-top padding-bottom">
+
+		<div class="col-xs-1"></div>
+
+		<div class="col-xs-10">
+			<div class='row'>
+				{% for category in categories %}
+				<a href = "{{url_for('category_view', category_id = category.id)}}">
+					<div class="btn btn-browse btn-circle margin-bottom margin-horizontal">
+						<div class='btn-circle-text ellipsis'>
+						{{category.name}}
+						</div>
+					</div>
+				</a>
+				{% endfor %}
+				<a href="{{url_for('category_create')}}">
+					<div class="btn btn-small btn-circle margin-bottom margin-horizontal">
+						<div class='btn-circle-text'>
+							<i class="fa fa-plus"></i> create
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-xs-1"></div>
+
+	</div>
+{% endblock %}

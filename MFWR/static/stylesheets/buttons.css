@@ -49,11 +49,21 @@
   margin-bottom: 10px;
 }
 
+.btn-circle {
+  /* width and height must be equal */
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+}
+
 .btn-box-text{
   font-size: 1.5em;
-  /*position: absolute;
-  top: 50%;
-  margin-top: -0.5em;*/
   line-height: 140px;
+  text-align: center;
+}
+
+.btn-circle-text{
+  font-size: 1.5em;
+  line-height: 200px;
   text-align: center;
 }

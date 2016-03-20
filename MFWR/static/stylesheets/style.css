@@ -70,3 +70,7 @@
   font-weight: 700;
   letter-spacing: .7em;
 }
+
+.ellipsis{
+  text-overflow: ellipsis;
+}

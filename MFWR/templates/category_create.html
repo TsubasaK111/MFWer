@@ -1,0 +1,52 @@
+{% extends "default.html" %}
+{% block content%}
+
+  <script>
+    $(document).ready(function() {
+    });
+  </script>
+
+  <div class="row banner main">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-11 padding-none">
+      <h2>Create New Category</h2>
+      {% include "flash.html" %}
+    </div>
+  </div>
+
+  <div class="row padding-bottom">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-9 col-sm-7 col-md-5">
+      <form id='new-category-form' class='form-horizontal' role='form' action = "{{url_for("category_create")}}" method="POST" enctype="multipart/form-data">
+        <div class='form-group'>
+          <div class='col-xs-12'>
+            <input name="category_name" id="category_name" class="form-control form-control-large margin-bottom-sm" type = "text">
+          </div>
+        </div>
+        <div class='form-group'>
+          <div class='col-xs-12'>
+            <input name="category_description" label='category description' id="category_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" type="text">
+          </div>
+        </div>
+
+        <div class='form-group'>
+          <div class='col-xs-12'>
+            <button type='submit' id='submit' class='btn btn-block btn-large'>create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class='col-xs-2'></div>
+  </div>
+
+  <div class="row padding-top padding-bottom">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10">
+      <div class="btn btn-signin">
+        <a href="{{url_for('category_browse')}}" >return to browsing</a>
+      </div>
+    </div>
+    <div class='col-xs-1'></div>
+  </div>
+
+{% endblock %}
