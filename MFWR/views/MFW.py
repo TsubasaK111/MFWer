@@ -42,9 +42,9 @@ def MFW_view(MFW_id):
                             MFW=thisMFW,
                             elements=theseElements )
 
-
 @app.route('/create/', methods=['GET', 'POST'])
-def MFW_create():
+@app.route('/create/<category_name>', methods=['GET', 'POST'])
+def MFW_create(category_name=None):
     """page to create a new Mental Framework."""
     form = MFWForm(request.form)
     # if request.method == "POST" and form.validate():
@@ -99,7 +99,11 @@ def MFW_create():
             return logInRedirect()
         user_id = getUserId(
                       flask_session['email'],flask_session['google_plus_id'] )
-        return render_template('MFW_create.html')
+        pdb.set_trace()
+        if not category_name == None:
+            return render_template( 'MFW_create.html',
+                                    category_name = category_name )
+        return render_template('MFW_create.html', category_name = "" )
 
 
 @app.route('/<int:MFW_id>/edit/', methods=['GET', 'POST'])

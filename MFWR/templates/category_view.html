@@ -1,0 +1,51 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+	<div class="row banner main">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<h2><a href="{{url_for('MFW_browse')}}">M□Ws</a> > {{category.name}}</h2>
+			{% include "flash.html" %}
+		</div>
+		<div class='col-xs-1'></div>
+	</div>
+
+	<div class="row padding-top padding-bottom">
+
+		<div class="col-xs-1"></div>
+
+		<div class="col-xs-10">
+			<div class='row'>
+				{% for MFW in MFWs %}
+				<a href = "{{url_for('MFW_view', MFW_id = MFW.id)}}">
+					<div class="btn btn-browse btn-box margin-bottom margin-horizontal">
+						<div class='btn-box-text'>
+						{{MFW.name}}
+						</div>
+					</div>
+				</a>
+				{% endfor %}
+				<a href="{{url_for('MFW_create', category_name=category.name)}}">
+					<div class="btn btn-small btn-box margin-bottom margin-horizontal">
+						<div class='btn-box-text'>
+							<i class="fa fa-plus"></i> create
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-xs-1"></div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<a href = "{{url_for('category_browse')}}">
+				<div class="fine-text">browse by category</div>
+			</a>
+		</div>
+	</div>
+{% endblock %}
