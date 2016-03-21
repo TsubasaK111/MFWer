@@ -28,6 +28,8 @@ def category_view(category_id):
     """view the MFWs in a category"""
     thisCategory = session.query(Category).filter_by(id = category_id).first()
     theseMFWs = session.query(MFW).filter_by(category_id=category_id).order_by(MFW.id).all()
+    if not thisCategory.description:
+        thisCategory.description = ""
     return render_template( 'category_view.html',
                             category=thisCategory,
                             MFWs=theseMFWs )
@@ -46,7 +48,8 @@ def category_create():
         category_name = request.form['category_name']
         category_description = request.form['category_description']
         new_category = Category( name = category_name,
-                                   creator_id = user_id )
+                                 description = category_description,
+                                 creator_id = user_id )
         session.add(new_category)
         session.commit()
 
@@ -62,67 +65,61 @@ def category_create():
         return render_template('category_create.html')
 
 
-# @app.route('/<int:category_id>/edit/', methods=['GET', 'POST'])
-# def MFW_edit(category_id):
-#     """page to edit a MFW. (authorized only for creators)"""
-#
-#     if 'access_token' not in flask_session:
-#         return logInRedirect()
-#     thisMFW = session.query(MFW).filter_by(id = category_id).first()
-#     user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
-#     if not thisMFW.creator_id == user_id:
-#         return redirect(url_for("MFW_view", category_id = category_id))
-#         flash("Only the creator of a MFW can edit items.")
-#
-#     if request.method == "POST":
-#         edited_name = request.form['edited_name']
-#         edited_description = request.form['edited_description']
-#         print "\nMFW_edit POST triggered, name is: ", edited_name
-#
-#         old_name = session.query(MFW).filter_by(id = category_id).first().name
-#
-#         result = session.execute(""" UPDATE MFW
-#                                      SET name=:edited_name
-#                                          description=:edited_description
-#                                      WHERE id=:category_id; """,
-#                                  { "edited_name": edited_name,
-#                                    "edited_description": edited_description,
-#                                    "category_id": category_id }
-#                                  )
-#         session.commit()
-#         flash( "item '" +  old_name + "' edited to '" + edited_name + "'. Jawohl!")
-#         return redirect( url_for("MFW_view", category_id=category_id) )
-#
-#     else:
-#         elements = session.query(Element).filter_by(id = category_id).all()
-#         return render_template( 'MFW_edit.html',
-#                                 MFW = MFW,
-#                                 elements = elements )
-#
-#
-# @app.route('/<int:category_id>/delete/', methods = ['GET', 'POST'])
-# def MFW_delete(category_id):
-#     """page to delete a MFW (authorized only for creators)."""
-#
-#     if 'access_token' not in flask_session:
-#         return logInRedirect()
-#
-#     thisMFW = session.query(MFW).filter_by(id = category_id).first()
-#     user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
-#
-#     if not thisMFW.creator_id == user_id:
-#         flash("Only MFW owners can delete MFWs.")
-#         return redirect(url_for("MFW_view", category_id = category_id))
-#
-#     if request.method == "POST":
-#         print "\nMFW_delete POST triggered!"
-#         deletedMFW = session.query(MFW).filter_by(id = category_id).first()
-#         session.delete(deletedMFW)
-#         session.commit()
-#         flash( "item '" + deletedMFW.name + "' deleted. Auf Wiedersehen!")
-#         return redirect(url_for("MFW_browse"))
-#
-#     else:
-#         print "/id/delete accessed..."
-#         return render_template( "MFW_delete.html",
-#                                 MFW = thisMFW )
+@app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
+def category_edit(category_id):
+    """page to edit a MFW. (authorized only for users)"""
+
+    if 'access_token' not in flask_session:
+        return logInRedirect()
+    thisCategory = session.query(Category).filter_by(id = category_id).first()
+
+    if request.method == "POST":
+        edited_name = request.form['edited_name']
+        edited_description = request.form['edited_description']
+        print "\ncategory_edit POST triggered, name is: ", edited_name
+        old_name = session.query(Category).filter_by(id = category_id).first().name
+
+        result = session.execute(""" UPDATE category
+                                     SET name=:edited_name,
+                                         description=:edited_description
+                                     WHERE id=:category_id; """,
+                                 { "edited_name": edited_name,
+                                   "edited_description": edited_description,
+                                   "category_id": category_id }
+                                 )
+        session.commit()
+        flash( "Category '" +  old_name + "' edited to '" + edited_name + "'. Jawohl!")
+        return redirect( url_for("category_view", category_id=category_id) )
+
+    else:
+        if not thisCategory.description:
+            thisCategory.description = ""
+        return render_template( 'category_edit.html',
+                                category = thisCategory )
+
+
+@app.route('/categories/<int:category_id>/delete/', methods = ['GET', 'POST'])
+def category_delete(category_id):
+    """page to delete a category (authorized only for creators)."""
+
+    if 'access_token' not in flask_session:
+        return logInRedirect()
+    thisCategory = session.query(Category).filter_by(id = category_id).first()
+    user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
+
+    if not thisCategory.creator_id == user_id:
+        flash("Only Category creators can delete Categories.")
+        return redirect(url_for("category_view", category_id = category_id))
+
+    if request.method == "POST":
+        print "\ncategory_delete POST triggered!"
+        deletedCategory = session.query(Category).filter_by(id = category_id).first()
+        session.delete(deletedCategory)
+        session.commit()
+        flash( "item '" + deletedCategory.name + "' deleted. Auf Wiedersehen!")
+        return redirect(url_for("category_browse"))
+
+    else:
+        print "categories/id/delete accessed..."
+        return render_template( "category_delete.html",
+                                category = thisCategory )

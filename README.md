@@ -27,3 +27,8 @@ and `vagrant up`.)
 
 ##License:
 This repo is distributed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
+
+##Todo:
+ * MFW update page
+ * Update JSON APIs
+ * Maybe implement another API?

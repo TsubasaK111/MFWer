@@ -1,0 +1,57 @@
+{% extends "default.html" %}
+{% block content %}
+
+	<div class="row banner main">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-11 padding-none">
+			<h2>Delete {{category.name}}</h2>
+			{% include "flash.html" %}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-1"></div>
+    <div class="col-xs-9 col-sm-7 col-md-5">
+			<div class="row">
+				<form method='POST' action={{url_for('category_delete', category_id=category.id)}}>
+					<div class='form-group'>
+						<div class='col-xs-12'>
+		          <h3> Are you sure you want to delete {{category.name}}?</h3>
+						</div>
+					</div>
+					<!-- <div class='form-group'>
+						<div class='col-xs-12'>
+							<input name="edited_name" label="edited name" id="edited_name" class="form-control form-control-large margin-bottom-sm" type = "text" placeholder = "name">
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='col-xs-12'>
+							<input name="edited_description" label="edited description" id="category_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description ({{ category.description }})" type="text">
+						</div>
+					</div> -->
+					<div class='form-group'>
+						<div class='col-xs-12 margin-top margin-bottom-sm'>
+							<input type ='submit' id='submit' class='btn btn-block btn-large btn-danger' value='Delete'>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class='row margin-top'>
+				<div class="col-xs-4">
+					<a href="{{ url_for('category_view', category_id=category.id) }}" >
+						<div class="btn btn-block btn-signin">
+							Go Back
+						</div>
+					</a>
+				</div>
+				<div class="col-xs-8"></div>
+			</div>
+
+		</div>
+    <div class='col-xs-2'></div>
+	</div>
+
+	</div>
+
+{% endblock %}

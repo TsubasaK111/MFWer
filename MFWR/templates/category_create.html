@@ -1,11 +1,6 @@
 {% extends "default.html" %}
 {% block content%}
 
-  <script>
-    $(document).ready(function() {
-    });
-  </script>
-
   <div class="row banner main">
     <div class="col-xs-1"></div>
     <div class="col-xs-11 padding-none">
@@ -28,7 +23,6 @@
             <input name="category_description" label='category description' id="category_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" type="text">
           </div>
         </div>
-
         <div class='form-group'>
           <div class='col-xs-12'>
             <button type='submit' id='submit' class='btn btn-block btn-large'>create</button>
@@ -43,7 +37,7 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-10">
       <div class="btn btn-signin">
-        <a href="{{url_for('category_browse')}}" >return to browsing</a>
+        <a href="{{url_for('category_browse')}}" >Go Back</a>
       </div>
     </div>
     <div class='col-xs-1'></div>
