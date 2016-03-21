@@ -42,6 +42,7 @@ def MFW_view(MFW_id):
                             MFW=thisMFW,
                             elements=theseElements )
 
+
 @app.route('/create/', methods=['GET', 'POST'])
 @app.route('/create/<category_name>', methods=['GET', 'POST'])
 def MFW_create(category_name=""):
@@ -112,6 +113,7 @@ def MFW_edit(MFW_id):
     if 'access_token' not in flask_session:
         return logInRedirect()
     thisMFW = session.query(MFW).filter_by(id = MFW_id).first()
+    theseElements = session.query(Element).filter_by(MFW_id=MFW_id).order_by(Element.order).all()
     user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
     if not thisMFW.creator_id == user_id:
         return redirect(url_for("MFW_view", MFW_id = MFW_id))
@@ -123,9 +125,9 @@ def MFW_edit(MFW_id):
         print "\nMFW_edit POST triggered, name is: ", edited_name
 
         old_name = session.query(MFW).filter_by(id = MFW_id).first().name
-
+        pdb.set_trace()
         result = session.execute(""" UPDATE MFW
-                                     SET name=:edited_name
+                                     SET name=:edited_name,
                                          description=:edited_description
                                      WHERE id=:MFW_id; """,
                                  { "edited_name": edited_name,
@@ -139,8 +141,8 @@ def MFW_edit(MFW_id):
     else:
         elements = session.query(Element).filter_by(id = MFW_id).all()
         return render_template( 'MFW_edit.html',
-                                MFW = MFW,
-                                elements = elements )
+                                MFW = thisMFW,
+                                elements = theseElements )
 
 
 @app.route('/<int:MFW_id>/delete/', methods = ['GET', 'POST'])

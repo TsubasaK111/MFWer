@@ -67,7 +67,8 @@ def category_create():
 
 @app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
 def category_edit(category_id):
-    """page to edit a MFW. (authorized only for users)"""
+    """page to edit a MFW. Authorized only for users
+       (intentionally not limited only to creators)."""
 
     if 'access_token' not in flask_session:
         return logInRedirect()
