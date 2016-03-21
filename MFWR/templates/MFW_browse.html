@@ -5,8 +5,21 @@
 	<div class="row banner main">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10">
-			<h2>M□Ws</h2>
-			{% include "flash.html" %}
+			<div class="row">
+				<div class="col-xs-1">
+					<h2>M□Ws</h2>
+				</div>
+				<div class="col-xs-10">
+					<a href = "{{url_for('category_browse')}}">
+						<div class="margin-top-sm fine-text">
+						browse by category
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				{% include "flash.html" %}
+			</div>
 		</div>
 		<div class='col-xs-1'></div>
 	</div>
@@ -40,12 +53,4 @@
 
 	</div>
 
-	<div class="row">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-10">
-			<a href = "{{url_for('category_browse')}}">
-				<div class="fine-text">browse by category</div>
-			</a>
-		</div>
-	</div>
 {% endblock %}

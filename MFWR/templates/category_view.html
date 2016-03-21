@@ -5,8 +5,16 @@
 	<div class="row banner main">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-10">
-			<h2><a href="{{url_for('MFW_browse')}}">M□Ws</a> > {{category.name}}</h2>
+
+			<h2>
+				<a href="{{url_for('MFW_browse')}}">M□Ws</a>
+				 >
+				<a href="{{url_for('category_browse')}}">C4tegories</a>
+				 >
+				{{category.name}}
+			</h2>
 			{% include "flash.html" %}
+
 		</div>
 		<div class='col-xs-1'></div>
 	</div>
