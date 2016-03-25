@@ -29,6 +29,7 @@ class User(Base):
     id            = Column( Integer, primary_key = True )
     creation_date = Column( DateTime, default=func.now() )
 
+
 class Category(Base):
     __tablename__ = 'category'
     name          = Column( String(40), nullable = False )
@@ -38,7 +39,7 @@ class Category(Base):
     creation_date = Column( DateTime, default=func.now() )
     user          = relationship("User")
 
-    # Many to many relationship with Puppy
+    # Many to many relationship with MFW
     MFWs = relationship(
         "MFW",
         secondary = association_table,
@@ -79,6 +80,7 @@ class MFW(Base):
             'reference_url': self.reference_url,
             'creation_date': self.creation_date
         }
+
 
 class Element(Base):
     __tablename__ = 'element'

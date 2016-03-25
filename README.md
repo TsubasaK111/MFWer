@@ -29,6 +29,7 @@ and `vagrant up`.)
 This repo is distributed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
 
 ##Todo:
- * MFW update page
+ * Make MFW_update page fully functional
+ * Recode MFWPopulator and MFWQueries (it's all boilerplate! :( )
  * Update JSON APIs
- * Maybe implement another API?
+ * Implement another API, mebbe?
