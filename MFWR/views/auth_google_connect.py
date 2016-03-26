@@ -118,8 +118,13 @@ def google_connect():
     user_info_from_db = getUserInfo(user_id)
 
     # Render user info
-    output = """ <h1>Welcome, {username}!</h1>
-                   <img src="{picture}">
+    output = """ <h3>Welcome, {username}!</h3>
+    			 <div class='row'>
+    				 <div class='col-xs-1'></div>
+    				 <div class='col-xs-11'>
+    					 <img class='margin-top img-responsive' src={picture}>
+    				 </div>
+    			 </div>
               """.format( username = flask_session['username'],
                           picture  = flask_session['picture'] )
     output += "</body></html>"

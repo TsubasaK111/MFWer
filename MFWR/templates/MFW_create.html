@@ -4,21 +4,21 @@
   <script>
     $(document).ready(function() {
 
-      $('#MFW_name').focus();
+      $('#mfw_name').focus();
 
-      $('#MFW_name').on('change', function(){
-        $('#MFW_description').focus();
-        var MFW_name = $('#MFW_name').val();
-        console.log("MFW_name.length is: " + MFW_name.length);
+      $('#mfw_name').on('change', function(){
+        $('#mfw_description').focus();
+        var mfw_name = $('#mfw_name').val();
+        console.log("mfw_name.length is: " + mfw_name.length);
         $('#element-group').empty().hide()
-        for( var i=0; i<MFW_name.length; i++ ){
+        for( var i=0; i<mfw_name.length; i++ ){
           var element_box =
             `<div class='form-group'>
                <div class='col-xs-1'></div>
-               <div class='element-letter col-xs-3'>${MFW_name[i]}</div>
-               <input name='element${i}-letter' type=hidden value=${MFW_name[i]}></input>
+               <div class='element-letter col-xs-3'>${mfw_name[i]}</div>
+               <input name='element${i}-letter' type=hidden value=${mfw_name[i]}></input>
                <div class='col-xs-8'>
-                 <input name='element${i}-description' id='element${i}-description' value='${MFW_name[i]}' class='elements btn-block form-control form-control-medium' type='text'>
+                 <input name='element${i}-description' id='element${i}-description' value='${mfw_name[i]}' class='elements btn-block form-control form-control-medium' type='text'>
                </div>
              </div>`;
           $('#element-group').append(element_box)
@@ -28,13 +28,13 @@
         $('.elements').delay(500).fadeIn().focus();
       });
 
-      $('#new-MFW-form').on('submit', function(event){
+      $('#new-mfw-form').on('submit', function(event){
         console.log('submit ' + String($('.elements').length));
         if (($('.elements').length) > 2) {
           console.log("'.elements' is more than 2, submitting!");
         } else {
           event.preventDefault();
-          $('#MFW_description').focus();
+          $('#mfw_description').focus();
           console.log("'.elements' is less than 2. put in more!");
         }
       });
@@ -54,15 +54,15 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-9 col-sm-7 col-md-6">
 
-      <form id='new-MFW-form' class='form-horizontal' role='form' action = {{ url_for("MFW_create") }} method="POST" enctype="multipart/form-data">
+      <form id='new-mfw-form' class='form-horizontal' role='form' action = {{ url_for("mfw_create") }} method="POST" enctype="multipart/form-data">
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="MFW_name" id="MFW_name" class="form-control form-control-large margin-bottom-sm" type = "text">
+            <input name="mfw_name" id="mfw_name" class="form-control form-control-large margin-bottom-sm" type = "text">
           </div>
         </div>
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="MFW_description" label='MFW description' id="MFW_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" type="text">
+            <input name="mfw_description" label='MFW description' id="mfw_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" type="text">
           </div>
         </div>
         <div id='element-group'>
@@ -103,7 +103,7 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-10">
       <div class="btn btn-signin">
-        <a href={{ url_for('MFW_browse') }} >Go Back</a>
+        <a href={{ url_for('mfw_browse') }} >Go Back</a>
       </div>
     </div>
     <div class='col-xs-1'></div>

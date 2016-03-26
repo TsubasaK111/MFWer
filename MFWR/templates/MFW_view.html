@@ -9,10 +9,10 @@
 				<div class='col-xs-1'></div>
 				<div class='col-xs-10'>
 					<div class='element-letter'>
-						{{MFW.name}}
+						{{mfw.name}}
 					</div>
 					<h3>
-						{{MFW.description}}
+						{{mfw.description}}
 					</h3>
 				</div>
 			</div>
@@ -31,14 +31,14 @@
 			 <div class='row'>
 				 <div class='col-xs-1'></div>
 				 <div class='col-xs-11'>
-					 <img class='margin-top img-responsive' src={{MFW.image_url}}>
+					 <img class='margin-top img-responsive' src={{mfw.image_url}}>
 				 </div>
 			 </div>
 
 			 <div class='row'>
 				 <div class='col-xs-4'></div>
 				 <div class='col-xs-8'>
-					 <a href={{MFW.reference_url}}>
+					 <a href={{mfw.reference_url}}>
 						 <div class='fine-text'>Reference </div>
 					 </a>
 				 </div>
@@ -46,21 +46,21 @@
 
 			<div class='row margin-top'>
 				<div class="col-xs-4">
-					<a href={{ url_for('MFW_browse') }} >
+					<a href={{ url_for('mfw_browse') }} >
 						<div class="btn btn-block btn-signin">
 		        	Go Back
 		      	</div>
 					</a>
 				</div>
 				<div class="col-xs-4">
-					<a href={{ url_for('MFW_edit',MFW_id=MFW.id) }}>
+					<a href={{ url_for('mfw_edit',mfw_id=mfw.id) }}>
 						<div class="btn btn-block btn-warning">
 							Edit
 						</div>
 					</a>
 				</div>
 				<div class="col-xs-4">
-	        <a href={{ url_for('MFW_delete',MFW_id=MFW.id) }}>
+	        <a href={{ url_for('mfw_delete',mfw_id=mfw.id) }}>
 						<div class="btn btn-block btn-danger">
 							Delete
 						</div>

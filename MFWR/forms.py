@@ -12,10 +12,10 @@ class CategoryForm(Form):
 
 
 class MFWForm(Form):
-    MFW_name =          StringField( "Name",
+    mfw_name =          StringField( "Name",
                                  [ validators.InputRequired(),
                                    validators.Length(min=2, max=20) ] )
-    MFW_description =   StringField( "Description",
+    mfw_description =   StringField( "Description",
                                  [ validators.InputRequired(),
                                    validators.Length(min=2, max=100) ] )
     id =                IntegerField( "MFW_ID" )
@@ -32,4 +32,4 @@ class ElementForm(Form):
                                  validators.Length(min=2, max=100) ] )
     order =       IntegerField("Order",
                                [ validators.InputRequired() ] )
-    id =          IntegerField("element_ID" )
+    id =          IntegerField("Element_ID" )

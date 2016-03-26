@@ -2,7 +2,6 @@ __all__ = [ "auth",
             "auth_google_connect",
             "upload",
             "category",
-            "MFW",
+            "mfw",
             "element",
-            "api",
-            "test" ]
+            "api" ]

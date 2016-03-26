@@ -4,48 +4,57 @@
 	<div class="row banner main">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-11 padding-none">
-			<h2 id='target1'>Edit {{MFW.name}}</h2>
+			<h2 id='target1'>Edit {{mfw.name}}</h2>
 			{% include "flash.html" %}
 		</div>
 	</div>
-
-	<!-- <div class="row">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-10 MFW-list">
-			<h3>{{MFW.name}}</h3>
-			<p> M□W_edit!!! </p>
-		</div>
-	</div> -->
 
 	<div class="row">
 		<div class="col-xs-1"></div>
     <div class="col-xs-9 col-sm-7 col-md-6">
 			<div class="row">
-				<form method='POST' action={{url_for('MFW_edit', MFW_id=MFW.id)}}>
+				<form method='POST' action={{url_for('mfw_edit', mfw_id=mfw.id)}}>
 
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_name" label="edited name" id="edited_name" class="form-control form-control-large margin-bottom-sm" type = "text" value="{{MFW.name}}" placeholder = "name">
+							<input name="edited_name" label="edited name" id="edited_name" class="form-control form-control-large margin-bottom-sm" type = "text" value="{{mfw.name}}" placeholder = "name">
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_description" label="edited description" id="edited_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" value="{{MFW.description}}" type="text">
+							<input name="edited_description" label="edited description" id="edited_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" value="{{mfw.description}}" type="text">
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='col-xs-12'>
+							<input name="edited_category" label='edited category' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{mfw.category_id}}" type="text">
 						</div>
 					</div>
 
+					<div class='form-group'>
+						<div class='col-xs-12'>
+							<input name="edited_image_file" class="margin-bottom-sm" type="file">
+						</div>
+						<div class='col-xs-12'>
+							<input name="edited_image_url" label="edited Image URL" id="edited_image_url" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="link image" value="{{mfw.image_url}}" type="text">
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='col-xs-12'>
+							<input name="edited_reference_url" label='edited Reference URL' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="link to related article" value="{{mfw.reference_url}}" type="text">
+						</div>
+					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
 							<input type ='submit' id='submit' class='btn btn-block btn-large' value='Update'>
 						</div>
 					</div>
-
 				</form>
 			</div>
 
 			<div class='row margin-top'>
 				<div class="col-xs-4">
-					<a href="{{ url_for('MFW_view', MFW_id=MFW.id) }}" >
+					<a href="{{ url_for('mfw_view', mfw_id=mfw.id) }}" >
 						<div class="btn btn-block btn-signin">
 							Go Back
 						</div>

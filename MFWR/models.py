@@ -13,8 +13,8 @@ Base = declarative_base()
 
 
 # Table for many to many relationship between Category and MFW
-association_table = Table('association', Base.metadata,
-    Column('MFW_id', Integer, ForeignKey('MFW.id')),
+MFWs_Categories = Table('mfws_categories', Base.metadata,
+    Column('mfw_id', Integer, ForeignKey('mfw.id')),
     Column('category_id', Integer, ForeignKey('category.id'))
 )
 
@@ -35,16 +35,16 @@ class Category(Base):
     name          = Column( String(40), nullable = False )
     description   = Column( String(100) )
     id            = Column( Integer, primary_key = True )
-    creator_id    = Column( Integer, ForeignKey('user.id'), nullable = False )
+    creator_id    = Column( Integer,
+                            ForeignKey('user.id'),
+                            nullable = False )
     creation_date = Column( DateTime, default=func.now() )
     user          = relationship("User")
 
     # Many to many relationship with MFW
-    MFWs = relationship(
-        "MFW",
-        secondary = association_table,
-        backref="categorys"
-    )
+    mfws = relationship( "MFW",
+                         secondary = MFWs_Categories,
+                         back_populates="categories" )
 
     @property
     def serialize(self):
@@ -57,7 +57,7 @@ class Category(Base):
 
 
 class MFW(Base):
-    __tablename__ = 'MFW'
+    __tablename__ = 'mfw'
     name          = Column( String(20), nullable = False )
     description   = Column( String(100) )
     image_url     = Column( String(200) )
@@ -65,9 +65,13 @@ class MFW(Base):
     id            = Column( Integer, primary_key = True )
     creator_id    = Column( Integer, ForeignKey('user.id'), nullable = False )
     creation_date = Column( DateTime, default=func.now() )
-    category_id   = Column( Integer, ForeignKey('category.id') )
     user          = relationship("User")
-    element       = relationship( "Element", backref="MFW" )
+    element       = relationship( "Element", backref="mfw" )
+
+    # Many to many relationship with Category
+    categories = relationship( "Category",
+                         secondary = MFWs_Categories,
+                         back_populates="mfws" )
 
     @property
     def serialize(self):
@@ -88,7 +92,7 @@ class Element(Base):
     description   = Column( String(250) )
     order         = Column( Integer )
     id            = Column( Integer, primary_key = True )
-    MFW_id        = Column( Integer, ForeignKey('MFW.id') )
+    mfw_id        = Column( Integer, ForeignKey('mfw.id') )
     creation_date = Column( DateTime, default=func.now() )
 
     @property
@@ -97,7 +101,7 @@ class Element(Base):
         return { 'letter': self.letter,
                  'id': self.id,
                  'description': self.description,
-                 'MFW_id': self.MFW_id,
+                 'mfw_id': self.mfw_id,
                  'order': self.order,
                  'creation_date': self.creation_date
                 }
@@ -115,32 +119,10 @@ DatabaseSession = sessionmaker(bind = engine)
 session = DatabaseSession()
 
 
-# def before_flush(session, flush_context, instances):
-#     """populate the "current_occupancy" column, prevent puppy overflows."""
-#     logging.info( "\nnew flush! Session.new is: ", session.new )
-#     for each in session.new:
-#         logging.info( "__tablename__ is: ", each.__tablename__ )
-#         if each.__tablename__ == "MFW":
-#             logging.info( "each. is: ", each.shelter_id )
-#             remaining_capacity, current_occupancy = remaining_capacity_counter(
-#                                                             session,
-#                                                             each.shelter_id)
-#             if remaining_capacity - 1 < 0:
-#                 puppies_on_hold.append(each)
-#                 logging.warning( "shelter full! ", each, " will not be inserted." )
-#                 logging.warning( "puppies_on_hold contains: ", puppies_on_hold )
-#                 session.expunge(each)
-#                 pdb.set_trace()
-#             else:
-#                 occupancy_update_result = session.execute("""
-#                         UPDATE shelter
-#                         SET current_occupancy = :current_occupancy
-#                         WHERE id = :shelter_id
-#                     """,
-#                     {"current_occupancy": current_occupancy,
-#                     "shelter_id": each.shelter_id}
-#                     )
-#                 logging.info( each.name, " has been put into: ", occupancy_update_result )
-#
-#
-# event.listen(session, 'before_flush', before_flush)
+# def after_attach(session, instance):
+#     """ flush session (commit all changes to the SQL db)
+#         whenever a 'category' is added. """
+#     logging.info( "\nnew attach! instance is: ", instance )
+#     logging.info( "Session.new is: ", session.new )
+#     if instance.__tablename__ == "shelter":
+#         session.flush()

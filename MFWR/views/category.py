@@ -26,13 +26,12 @@ def category_browse():
 @app.route('/categories/<int:category_id>/view/')
 def category_view(category_id):
     """view the MFWs in a category"""
-    thisCategory = session.query(Category).filter_by(id = category_id).first()
-    theseMFWs = session.query(MFW).filter_by(category_id=category_id).order_by(MFW.id).all()
-    if not thisCategory.description:
-        thisCategory.description = ""
+    category = session.query(Category).filter_by(id = category_id).first()
+    if not category.description:
+        category.description = ""
     return render_template( 'category_view.html',
-                            category=thisCategory,
-                            MFWs=theseMFWs )
+                            category=category,
+                            mfws=category.mfws )
 
 
 @app.route('/categories/create/', methods=['GET', 'POST'])
@@ -72,7 +71,7 @@ def category_edit(category_id):
 
     if 'access_token' not in flask_session:
         return logInRedirect()
-    thisCategory = session.query(Category).filter_by(id = category_id).first()
+    category = session.query(Category).filter_by(id = category_id).first()
 
     if request.method == "POST":
         edited_name = request.form['edited_name']
@@ -93,10 +92,9 @@ def category_edit(category_id):
         return redirect( url_for("category_view", category_id=category_id) )
 
     else:
-        if not thisCategory.description:
-            thisCategory.description = ""
-        return render_template( 'category_edit.html',
-                                category = thisCategory )
+        if not category.description:
+            category.description = ""
+        return render_template( 'category_edit.html', category = category )
 
 
 @app.route('/categories/<int:category_id>/delete/', methods = ['GET', 'POST'])
@@ -105,10 +103,10 @@ def category_delete(category_id):
 
     if 'access_token' not in flask_session:
         return logInRedirect()
-    thisCategory = session.query(Category).filter_by(id = category_id).first()
+    category = session.query(Category).filter_by(id = category_id).first()
     user_id = getUserId(flask_session['email'],flask_session['google_plus_id'])
 
-    if not thisCategory.creator_id == user_id:
+    if not category.creator_id == user_id:
         flash("Only Category creators can delete Categories.")
         return redirect(url_for("category_view", category_id = category_id))
 
@@ -123,4 +121,4 @@ def category_delete(category_id):
     else:
         print "categories/id/delete accessed..."
         return render_template( "category_delete.html",
-                                category = thisCategory )
+                                category = category )
