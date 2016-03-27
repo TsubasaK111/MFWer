@@ -44,16 +44,13 @@ def category_create():
             return logInRedirect()
         user_id = getUserId(
                       flask_session['email'],flask_session['google_plus_id'] )
-        category_name = request.form['category_name']
-        category_description = request.form['category_description']
-        new_category = Category( name = category_name,
-                                 description = category_description,
+        new_category = Category( name = request.form['category_name'],
+                                 description = request.form['category_description'],
                                  creator_id = user_id )
         session.add(new_category)
         session.commit()
-
-        flash( "new Category '" + category_name + "' created!" )
-        print "\nnew_category POST triggered, name is: ", category_name
+        flash( "new Category '" + new_category.name + "' created!" )
+        print "\nnew_category POST triggered, name is: ", new_category.name
         return redirect(url_for("category_browse"))
 
     else:

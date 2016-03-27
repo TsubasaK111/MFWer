@@ -9,7 +9,7 @@ from werkzeug import secure_filename
 
 
 def allowed_file(filename):
-    return '.' in filename and  \
+    return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_IMAGE_EXTENSIONS']
 
 
