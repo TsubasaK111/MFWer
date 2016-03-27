@@ -17,17 +17,17 @@
 
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_name" label="edited name" id="edited_name" class="form-control form-control-large margin-bottom-sm" type = "text" value="{{mfw.name}}" placeholder = "name">
+                {{form.name(placeholder=form.name.label.text, class_="form-control form-control-large margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_description" label="edited description" id="edited_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" value="{{mfw.description}}" type="text">
+              {{form.description(placeholder=form.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_category" label='edited category' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{mfw.category_id}}" type="text">
+							<input name="edited_categories" label='edited categories' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{mfw.category_id}}" type="text">
 						</div>
 					</div>
 
@@ -36,12 +36,12 @@
 							<input name="edited_image_file" class="margin-bottom-sm" type="file">
 						</div>
 						<div class='col-xs-12'>
-							<input name="edited_image_url" label="edited Image URL" id="edited_image_url" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="link image" value="{{mfw.image_url}}" type="text">
+              {{form.image_url( placeholder=form.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_reference_url" label='edited Reference URL' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="link to related article" value="{{mfw.reference_url}}" type="text">
+              {{form.reference_url( placeholder=form.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>

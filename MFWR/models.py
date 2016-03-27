@@ -1,5 +1,5 @@
 from sqlalchemy import ( Table, Column, ForeignKey, Integer, String,
-                         DateTime, func )
+                         DateTime, func, UniqueConstraint )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -32,7 +32,7 @@ class User(Base):
 
 class Category(Base):
     __tablename__ = 'category'
-    name          = Column( String(40), nullable = False )
+    name          = Column( String(40), nullable = False, unique = True )
     description   = Column( String(100) )
     id            = Column( Integer, primary_key = True )
     creator_id    = Column( Integer,
@@ -58,7 +58,7 @@ class Category(Base):
 
 class MFW(Base):
     __tablename__ = 'mfw'
-    name          = Column( String(20), nullable = False )
+    name          = Column( String(20), nullable = False, unique = True )
     description   = Column( String(100) )
     image_url     = Column( String(200) )
     reference_url = Column( String(200) )
@@ -70,8 +70,8 @@ class MFW(Base):
 
     # Many to many relationship with Category
     categories = relationship( "Category",
-                         secondary = MFWs_Categories,
-                         back_populates="mfws" )
+                               secondary = MFWs_Categories,
+                               back_populates="mfws" )
 
     @property
     def serialize(self):

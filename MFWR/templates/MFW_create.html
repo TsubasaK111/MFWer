@@ -57,12 +57,12 @@
       <form id='new-mfw-form' class='form-horizontal' role='form' action = {{ url_for("mfw_create") }} method="POST" enctype="multipart/form-data">
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="mfw_name" id="mfw_name" class="form-control form-control-large margin-bottom-sm" type = "text">
+            {{form.name(placeholder=form.name.label.text, id="mfw_name", class_="form-control form-control-large margin-bottom-sm")}}
           </div>
         </div>
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="mfw_description" label='MFW description' id="mfw_description" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="description" type="text">
+            {{form.description(placeholder=form.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
         <div id='element-group'>
@@ -70,7 +70,7 @@
         </div>
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="category" label='category' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{category_name}}" type="text">
+            <input name="category" label='category' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{category_names}}" type="text">
           </div>
         </div>
         <div class='form-group'>
@@ -79,13 +79,13 @@
             <input name="image_file" class="margin-bottom-sm" type="file">
           </div>
           <div class='col-xs-12'>
-            <input name="image_url" label='Image URL' class="btn-block form-control form-control-medium margin-bottom-sm" placeholder="link image (optional)" type="text">
+            {{form.image_url(placeholder=form.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
 
         <div class='form-group'>
           <div class='col-xs-12'>
-            <input name="reference_url" label='Reference URL' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="link to related article" type="text">
+            {{form.reference_url( placeholder=form.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
         <div class='form-group'>

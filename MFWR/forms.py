@@ -2,25 +2,25 @@ from wtforms import Form, BooleanField, StringField, DateField, IntegerField, De
 
 
 class CategoryForm(Form):
-    category_name =        StringField( "Name",
-                                        [ validators.InputRequired(),
-                                          validators.Length(min=2, max=40) ] )
-    category_description = StringField( "Description",
-                                        [ validators.InputRequired(),
-                                          validators.Length(min=2, max=100) ] )
-    id =                   IntegerField( "Category_ID" )
+    name =        StringField( "NAME",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=2, max=40) ] )
+    description = StringField( "Description",
+                               [ validators.InputRequired(),
+                                 validators.Length(min=2, max=100) ] )
+    id =          IntegerField( "Category_ID" )
 
 
 class MFWForm(Form):
-    mfw_name =          StringField( "Name",
+    name =          StringField( "Name",
                                  [ validators.InputRequired(),
                                    validators.Length(min=2, max=20) ] )
-    mfw_description =   StringField( "Description",
+    description =   StringField( "Description",
                                  [ validators.InputRequired(),
                                    validators.Length(min=2, max=100) ] )
-    id =                IntegerField( "MFW_ID" )
-    image_url =         StringField( "Image URL", [validators.URL() ] )
-    reference_url =     StringField( "Reference URL", [ validators.URL() ] )
+    id =            IntegerField( "MFW_ID" )
+    image_url =     StringField( "Image URL", [validators.URL() ] )
+    reference_url = StringField( "Reference URL", [ validators.URL() ] )
 
 
 class ElementForm(Form):
