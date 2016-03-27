@@ -17,17 +17,17 @@
 
 					<div class='form-group'>
 						<div class='col-xs-12'>
-                {{form.name(placeholder=form.name.label.text, class_="form-control form-control-large margin-bottom-sm")}}
+                {{mfwForm.name(placeholder=mfwForm.name.label.text, class_="form-control form-control-large margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-              {{form.description(placeholder=form.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+              {{mfwForm.description( placeholder=mfwForm.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-							<input name="edited_categories" label='edited categories' class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{mfw.category_id}}" type="text">
+							<input name="edited_categories" label="edited categories" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{category_names}}" type="text">
 						</div>
 					</div>
 
@@ -36,12 +36,12 @@
 							<input name="edited_image_file" class="margin-bottom-sm" type="file">
 						</div>
 						<div class='col-xs-12'>
-              {{form.image_url( placeholder=form.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+              {{mfwForm.image_url( placeholder=mfwForm.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>
 						<div class='col-xs-12'>
-              {{form.reference_url( placeholder=form.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+              {{mfwForm.reference_url( placeholder=mfwForm.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 						</div>
 					</div>
 					<div class='form-group'>

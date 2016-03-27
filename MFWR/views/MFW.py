@@ -41,8 +41,8 @@ def mfw_view(mfw_id):
 
 
 @app.route('/create/', methods=['GET', 'POST'])
-@app.route('/create/<category_names>', methods=['GET', 'POST'])
-def mfw_create(category_names=""):
+@app.route('/create/<category_name>', methods=['GET', 'POST'])
+def mfw_create(category_name=""):
     """page to create a new Mental Framework."""
     form = MFWForm(request.form)
     if 'access_token' not in flask_session:
@@ -59,11 +59,15 @@ def mfw_create(category_names=""):
         if duplicate_mfw:
             flash("The name "+new_mfw.name+" already exists.")
             return redirect(url_for("mfw_create", form=form))
-        uploaded_image = upload_image(request.files['image_file'])
+        try:
+            uploaded_image = upload_image(request.files['image_file'])
+        except:
+            uploaded_image = False
         if uploaded_image: new_mfw.image_url = uploaded_image
 
         category_names = str(request.form['category']).split(",")
         for category_name in category_names:
+            category_name = category_name.strip()
             if not ((category_name == None) or (category_name == "")):
                 existing_category = session.query(Category).\
                                             filter_by(name = category_name).\
@@ -101,19 +105,16 @@ def mfw_create(category_names=""):
         return redirect(url_for("mfw_browse"))
 
     else:
-        if not ((category_names == None) or (category_names == "")):
-            return render_template( 'mfw_create.html',
-                                    form=form,
-                                    category_names = category_names )
         return render_template( 'mfw_create.html',
                                 form=form,
-                                category_names = category_names )
+                                category_name = category_name )
 
 
 @app.route('/<int:mfw_id>/edit/', methods=['GET', 'POST'])
 def mfw_edit(mfw_id):
     """page to edit a MFW. (authorized only for creators)"""
     # guard clauses:
+    pdb.set_trace()
     if 'access_token' not in flask_session:
         return logInRedirect()
     mfw = session.query(MFW).filter_by(id = mfw_id).first()
@@ -122,32 +123,31 @@ def mfw_edit(mfw_id):
         return redirect(url_for("mfw_view", mfw_id = mfw_id))
         flash("Only the creator of a MFW can edit items.")
 
-    elements = session.query(Element).\
-                       filter_by(mfw_id=mfw_id).\
-                       order_by(Element.order).\
-                       all()
-    form = MFWForm( request.form, mfw )
+    elements = session.query(Element).filter_by(mfw_id=mfw_id).\
+                                      order_by(Element.order).\
+                                      all()
+    mfwForm = MFWForm( request.form, mfw )
 
     if request.method == "POST":
-        print "\nmfw_edit POST triggered, name is: ", form.name
+        print "\nmfw_edit POST triggered, name is: ", mfwForm.name.name
         old_name = mfw.name
-        form.populate_obj(mfw)
-        edited_image_file = upload_image(request.files['edited_image_file'])
+        mfwForm.populate_obj(mfw)
+        try:
+            edited_image_file = upload_image(request.files['edited_image_file'])
+        except:
+            edited_image_file = False
         if edited_image_file: mfw.image_url = edited_image_file
-        pdb.set_trace()
-
-        # edited_categories = request.form['edited_categories'].split(",")
-        # for edited_category in edited_categories:
-        #     mfw.categories.append(
 
         edited_category_names = str(request.form['edited_categories']).split(",")
         if edited_category_names:
             for edited_category_name in edited_category_names:
-                existing_category = session.query(Category).\
-                                            filter_by(name = edited_category_name).\
-                                            first()
-                if existing_category:
-                    mfw.categories.append(existing_category)
+                edited_category_name = edited_category_name.strip()
+                if not ((edited_category_name == None) or (edited_category_name == "")):
+                    existing_category = session.query(Category).\
+                                                filter_by(name = edited_category_name).\
+                                                first()
+                    if existing_category:
+                        mfw.categories.append(existing_category)
                 else:
                     category = Category( name=edited_category_name,
                                          creator_id=user_id )
@@ -158,9 +158,13 @@ def mfw_edit(mfw_id):
         return redirect( url_for("mfw_view", mfw_id=mfw_id) )
 
     else:
+        category_names = ""
+        for category in mfw.categories:
+            category_names = category_names + category.name + ", "
         return render_template( 'mfw_edit.html', mfw = mfw,
                                                  elements = elements,
-                                                 form = form )
+                                                 mfwForm = mfwForm,
+                                                 category_names = category_names )
 
 
 @app.route('/<int:mfw_id>/delete/', methods = ['GET', 'POST'])
