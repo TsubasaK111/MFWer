@@ -66,7 +66,7 @@ class MFW(Base):
     creator_id    = Column( Integer, ForeignKey('user.id'), nullable = False )
     creation_date = Column( DateTime, default=func.now() )
     user          = relationship("User")
-    element       = relationship( "Element", backref="mfw" )
+    elements       = relationship( "Element", backref="mfw" )
 
     # Many to many relationship with Category
     categories = relationship( "Category",

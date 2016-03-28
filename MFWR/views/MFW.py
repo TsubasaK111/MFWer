@@ -32,23 +32,22 @@ def mfw_browse():
 def mfw_view(mfw_id):
     """view the full details of a MFW"""
     mfw = session.query(MFW).filter_by(id = mfw_id).first()
-    elements = session.query(Element).\
-                       filter_by(mfw_id=mfw_id).\
-                       order_by(Element.order).\
-                       all()
-    return render_template( 'mfw_view.html', mfw=mfw,
-                                             elements=elements )
+    return render_template( 'mfw_view.html', mfw=mfw, elements=mfw.elements )
 
 
 @app.route('/create/', methods=['GET', 'POST'])
 @app.route('/create/<category_name>', methods=['GET', 'POST'])
 def mfw_create(category_name=""):
     """page to create a new Mental Framework."""
-    form = MFWForm(request.form)
+    #guard clauses:
     if 'access_token' not in flask_session:
         return logInRedirect()
     user_id = getUserId( flask_session['email'],
                          flask_session['google_plus_id'] )
+
+    #form initialization
+    form = MFWForm(request.form)
+
     if request.method == "POST": #and form.validate():
         new_mfw = MFW()
         form.populate_obj(new_mfw)
@@ -122,21 +121,25 @@ def mfw_edit(mfw_id):
         return redirect(url_for("mfw_view", mfw_id = mfw_id))
         flash("Only the creator of a MFW can edit items.")
 
-    elements = session.query(Element).filter_by(mfw_id=mfw_id).\
-                                      order_by(Element.order).\
-                                      all()
+    # form initialization
     mfwForm = MFWForm( request.form, mfw )
+    elementForms = []
+    for element in mfw.elements:
+        elementForms.append(ElementForm( request.form, element ))
 
     if request.method == "POST":
-        print "\nmfw_edit POST triggered, name is: ", mfwForm.name.name
+        print "\nmfw_edit POST triggered, name is: ", mfwForm.name.data
         old_name = mfw.name
         mfwForm.populate_obj(mfw)
+        pdb.set_trace()
+
         try:
             edited_image_file = upload_image(request.files['edited_image_file'])
         except:
             edited_image_file = False
         if edited_image_file: mfw.image_url = edited_image_file
 
+        # TODO: refactor and functionalize below category mumbojumbo
         edited_category_names = str(request.form['edited_categories']).split(",")
         if edited_category_names:
             for edited_category_name in edited_category_names:
@@ -160,10 +163,10 @@ def mfw_edit(mfw_id):
         category_names = ""
         for category in mfw.categories:
             category_names = category_names + category.name + ", "
-        return render_template( 'mfw_edit.html', mfw = mfw,
-                                                 elements = elements,
-                                                 mfwForm = mfwForm,
-                                                 category_names = category_names )
+        return render_template( 'mfw_edit.html',
+                                mfwForm = mfwForm,
+                                elementForms = elementForms,
+                                category_names = category_names )
 
 
 @app.route('/<int:mfw_id>/delete/', methods = ['GET', 'POST'])
@@ -180,13 +183,11 @@ def mfw_delete(mfw_id):
 
     if request.method == "POST":
         print "\nmfw_delete POST triggered!"
-        deleted_mfw = session.query(MFW).filter_by(id = mfw_id).first()
-        session.delete(deleted_mfw)
+        session.delete(mfw)
         session.commit()
-        flash( "item '" + deleted_mfw.name + "' deleted. Auf Wiedersehen!")
+        flash( "item '" + mfw.name + "' deleted. Auf Wiedersehen!")
         return redirect(url_for("mfw_browse"))
 
     else:
         print "/id/delete accessed..."
-        return render_template( "mfw_delete.html",
-                                mfw = mfw )
+        return render_template( "mfw_delete.html", mfw = mfw )
