@@ -114,7 +114,6 @@ def mfw_create(category_name=""):
 def mfw_edit(mfw_id):
     """page to edit a MFW. (authorized only for creators)"""
     # guard clauses:
-    pdb.set_trace()
     if 'access_token' not in flask_session:
         return logInRedirect()
     mfw = session.query(MFW).filter_by(id = mfw_id).first()

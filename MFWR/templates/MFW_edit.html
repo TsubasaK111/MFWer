@@ -12,45 +12,57 @@
 	<div class="row">
 		<div class="col-xs-1"></div>
     <div class="col-xs-9 col-sm-7 col-md-6">
-			<div class="row">
-				<form method='POST' action={{url_for('mfw_edit', mfw_id=mfw.id)}}>
+			<form method='POST' class='form-horizontal' action={{url_for('mfw_edit', mfw_id=mfw.id)}}>
 
-					<div class='form-group'>
-						<div class='col-xs-12'>
-                {{mfwForm.name(placeholder=mfwForm.name.label.text, class_="form-control form-control-large margin-bottom-sm")}}
-						</div>
+				<div class='form-group'>
+					<div class='col-xs-12'>
+              {{mfwForm.name(placeholder=mfwForm.name.label.text, class_="form-control form-control-large margin-bottom-sm")}}
 					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
-              {{mfwForm.description( placeholder=mfwForm.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
-						</div>
+				</div>
+				<div class='form-group'>
+					<div class='col-xs-12'>
+            {{mfwForm.description( placeholder=mfwForm.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
-							<input name="edited_categories" label="edited categories" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{category_names}}" type="text">
-						</div>
-					</div>
+				</div>
+        <div id='element-group' style="display: block">
 
-					<div class='form-group'>
-						<div class='col-xs-12'>
-							<input name="edited_image_file" class="margin-bottom-sm" type="file">
-						</div>
-						<div class='col-xs-12'>
-              {{mfwForm.image_url( placeholder=mfwForm.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
-						</div>
+          {% for element in elements %}
+          <div class='form-group'>
+             <div class='col-xs-1'></div>
+             <div class='element-letter col-xs-3'>{{element.letter}}</div>
+             <div class='col-xs-8'>
+               <input name='element{{element.order}}-description' id='element{{element.order}}-description' value='{{element.description}}' class='elements btn-block form-control form-control-medium' style="display: block" type='text'>
+              </input>
+             </div>
+           </div>
+           {% endfor %}
+
+        </div>
+				<div class='form-group'>
+					<div class='col-xs-12'>
+						<input name="edited_categories" label="edited categories" class="btn-block from-control form-control-medium margin-bottom-sm" placeholder="categories" value="{{category_names}}" type="text">
 					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
-              {{mfwForm.reference_url( placeholder=mfwForm.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
-						</div>
+				</div>
+
+				<div class='form-group'>
+					<div class='col-xs-12'>
+						<input name="edited_image_file" class="margin-bottom-sm" type="file">
 					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
-							<input type ='submit' id='submit' class='btn btn-block btn-large' value='Update'>
-						</div>
+					<div class='col-xs-12'>
+            {{mfwForm.image_url( placeholder=mfwForm.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
 					</div>
-				</form>
-			</div>
+				</div>
+				<div class='form-group'>
+					<div class='col-xs-12'>
+            {{mfwForm.reference_url( placeholder=mfwForm.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+					</div>
+				</div>
+				<div class='form-group'>
+					<div class='col-xs-12'>
+						<input type ='submit' id='submit' class='btn btn-block btn-large' value='update'>
+					</div>
+				</div>
+			</form>
 
 			<div class='row margin-top'>
 				<div class="col-xs-4">
