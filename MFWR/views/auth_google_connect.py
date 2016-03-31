@@ -164,14 +164,6 @@ def google_disconnect():
         return response
 
 
-
-def logInRedirect():
-    """redirect routes to the login page."""
-    thisFunction = inspect.stack()[1][3]
-    flash("It appears you're not logged in. Log in to access " + thisFunction + ".")
-    return redirect('/login')
-
-
 def createUser(flask_session):
     newUser = User( name = flask_session['username'],
                     picture = flask_session['picture'],

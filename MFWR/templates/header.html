@@ -14,7 +14,11 @@
 		</div>
 
 		<div class="col-md-1 col-sm-2 col-xs-3 btn btn-signin text-center">
-			<a href="{{url_for('login')}}">sign in</a>
+      {% if session.access_token %}
+			   <a href="{{url_for('logout')}}">Sign Out</a>
+      {% else %}
+         <a href="{{url_for('login')}}">Sign In</a>
+      {% endif %}
 		</div>
 
 	</div>

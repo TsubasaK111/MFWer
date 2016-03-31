@@ -59,3 +59,11 @@ def logInRedirect():
     thisFunction = inspect.stack()[1][3]
     flash("It appears you're not logged in. Log in to access " + thisFunction + ".")
     return redirect('/login')
+
+@app.route('/logbutton')
+def logInOrOut():
+    """"""
+    if 'access_token' not in flask_session:
+        return "Sign In"
+    else:
+        return "Sign Out"
