@@ -132,7 +132,7 @@ def google_connect():
             format(username = flask_session['username'] ))
     return output
 
-@app.route('/google_disconnect')
+@app.route('/google_disconnect', methods=['POST'])
 def google_disconnect():
     # Only disconnect a connected user.
     access_token = flask_session.get('access_token')
@@ -153,15 +153,16 @@ def google_disconnect():
         del flask_session['link']
         del flask_session['email']
 
-        response = make_response(json.dumps('Goodbye! Till Next Time!!'), 200)
+        response = make_response(json.dumps(u'Goodbye! Till Next Time!!'), 200)
         response.headers['Content-Type'] = 'application/json'
         return response
     else:
         # If this session's token was invalid
         response = make_response(
-                    json.dumps("!!! Unable to revoke user's token !!!"), 400 )
+                    json.dumps(u"!!! Unable to revoke user's token !!!"), 400 )
         response.headers['Content-Type'] = 'application/json'
         return response
+
 
 
 def logInRedirect():

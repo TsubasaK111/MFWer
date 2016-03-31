@@ -44,7 +44,6 @@ def mfw_create(category_name=""):
         return logInRedirect()
     user_id = getUserId( flask_session['email'],
                          flask_session['google_plus_id'] )
-
     #form initialization
     form = MFWForm(request.form)
 
@@ -131,7 +130,6 @@ def mfw_edit(mfw_id):
         print "\nmfw_edit POST triggered, name is: ", mfwForm.name.data
         old_name = mfw.name
         mfwForm.populate_obj(mfw)
-        pdb.set_trace()
 
         try:
             edited_image_file = upload_image(request.files['edited_image_file'])
