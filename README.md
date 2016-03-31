@@ -31,5 +31,3 @@ This repo is distributed under the <a href="http://opensource.org/licenses/MIT">
 ##Todo:
  * Make MFW_update page fully functional
  * Recode MFWPopulator and MFWQueries (it's all boilerplate! :( )
- * Update JSON APIs
- * Implement another API, mebbe?
