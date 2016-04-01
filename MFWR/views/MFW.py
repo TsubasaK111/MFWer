@@ -21,22 +21,22 @@ def landing():
     return render_template( 'landing.html' )
 
 
-@app.route('/browse/')
+@app.route('/mfw/browse/')
 def mfw_browse():
     """tile styled page to display and browse MFWs"""
     mfws = session.query(MFW).all()
     return render_template( 'mfw_browse.html', mfws=mfws )
 
 
-@app.route('/<int:mfw_id>/view/')
+@app.route('/mfw/<int:mfw_id>/view/')
 def mfw_view(mfw_id):
     """view the full details of a MFW"""
     mfw = session.query(MFW).filter_by(id = mfw_id).first()
     return render_template( 'mfw_view.html', mfw=mfw, elements=mfw.elements )
 
 
-@app.route('/create/', methods=['GET', 'POST'])
-@app.route('/create/<category_name>', methods=['GET', 'POST'])
+@app.route('/mfw/create/', methods=['GET', 'POST'])
+@app.route('/mfw/create/<category_name>', methods=['GET', 'POST'])
 def mfw_create(category_name=""):
     """page to create a new Mental Framework."""
     #guard clauses:
@@ -92,7 +92,7 @@ def mfw_create(category_name=""):
                                 category_name = category_name )
 
 
-@app.route('/<int:mfw_id>/edit/', methods=['GET', 'POST'])
+@app.route('/mfw/<int:mfw_id>/edit/', methods=['GET', 'POST'])
 def mfw_edit(mfw_id):
     """page to edit a MFW. (authorized only for creators)"""
     # guard clauses:
@@ -156,7 +156,7 @@ def mfw_edit(mfw_id):
                                 category_names = category_names )
 
 
-@app.route('/<int:mfw_id>/delete/', methods = ['GET', 'POST'])
+@app.route('/mfw/<int:mfw_id>/delete/', methods = ['GET', 'POST'])
 def mfw_delete(mfw_id):
     """page to delete a MFW (authorized only for creators)."""
     # guard clauses:

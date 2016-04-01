@@ -15,15 +15,15 @@ from auth import *
 # Debugging Dependencies
 import pdb, pprint, inspect
 
-@app.route('/categories/')
-@app.route('/categories/browse/')
+@app.route('/category/')
+@app.route('/category/browse/')
 def category_browse():
     """tile styled page to display and browse categories"""
     categories = session.query(Category).all()
     return render_template( 'category_browse.html', categories = categories )
 
 
-@app.route('/categories/<int:category_id>/view/')
+@app.route('/category/<int:category_id>/view/')
 def category_view(category_id):
     """view the MFWs in a category"""
     category = session.query(Category).filter_by(id = category_id).first()
@@ -34,7 +34,7 @@ def category_view(category_id):
                             mfws=category.mfws )
 
 
-@app.route('/categories/create/', methods=['GET', 'POST'])
+@app.route('/category/create/', methods=['GET', 'POST'])
 def category_create():
     """page to create a new Mental Framework."""
     form = CategoryForm(request.form)
@@ -61,7 +61,7 @@ def category_create():
         return render_template('category_create.html')
 
 
-@app.route('/categories/<int:category_id>/edit/', methods=['GET', 'POST'])
+@app.route('/category/<int:category_id>/edit/', methods=['GET', 'POST'])
 def category_edit(category_id):
     """page to edit a MFW. Authorized only for users
        (intentionally not limited only to creators)."""
@@ -94,7 +94,7 @@ def category_edit(category_id):
         return render_template( 'category_edit.html', category = category )
 
 
-@app.route('/categories/<int:category_id>/delete/', methods = ['GET', 'POST'])
+@app.route('/category/<int:category_id>/delete/', methods = ['GET', 'POST'])
 def category_delete(category_id):
     """page to delete a category (authorized only for creators)."""
 

@@ -3,18 +3,18 @@ from flask import Flask, render_template, url_for, request, redirect, flash, jso
 from MFWR import app
 
 # Database Dependencies
-from MFWR.models import session, User, MFW, Element
+from MFWR.models import session, User, MFW, Element, Category
 
 #A first attempt at an API endpoint (GET Req)
-@app.route('/MFWs/<int:mfw_id>/JSON/')
-def mfw_JSON(mfw_id):
-    MFW = session.query(MFW).filter_by(id = mfw_id).one()
-    elements = session.query(element).filter_by(mfw_id = mfw_id).all()
-    return jsonify(elements = [element.serialize for element in elements])
+@app.route('/mfw/<int:mfw_id>/json/')
+def mfw_json(mfw_id):
+    mfw = session.query(MFW).filter_by(id = mfw_id).one()
+    elements = mfw.elements
+    return jsonify(mfw = mfw.serialize, elements = [element.serialize for element in elements])
 
 #Another attempt at an API endpoint (GET Req)
-@app.route('/MFWs/<int:mfw_id>/element/<int:menu_id>/JSON/')
-def element_JSON(mfw_id, element_id):
-    MFW = session.query(MFW).filter_by(id = mfw_id).one()
-    element = session.query(element).filter_by(mfw_id = mfw_id).filter_by(id = menu_id).one()
-    return jsonify(element = element.serialize)
+@app.route('/category/<int:category_id>/json/')
+def category_json(category_id):
+    category = session.query(Category).filter_by(id = category_id).one()
+    mfws = category.mfws
+    return jsonify(category = category.serialize, mfws = [mfw.serialize for mfw in category.mfws])
