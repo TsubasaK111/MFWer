@@ -2,7 +2,7 @@ from wtforms import Form, BooleanField, StringField, DateField, IntegerField, De
 
 
 class CategoryForm(Form):
-    name =        StringField( "NAME",
+    name =        StringField( "Name",
                                [ validators.InputRequired(),
                                  validators.Length(min=2, max=40) ] )
     description = StringField( "Description",

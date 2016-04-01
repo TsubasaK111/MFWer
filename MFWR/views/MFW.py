@@ -17,7 +17,7 @@ from sqlalchemy import inspect
 
 @app.route('/')
 def landing():
-    """landing page for errbody!"""
+    """landing page for everybody!"""
     return render_template( 'landing.html' )
 
 
@@ -45,66 +45,50 @@ def mfw_create(category_name=""):
     user_id = getUserId( flask_session['email'],
                          flask_session['google_plus_id'] )
     #form initialization
-    form = MFWForm(request.form)
+    mfwForm = MFWForm(request.form)
 
-    if request.method == "POST": #and form.validate():
-        new_mfw = MFW()
-        form.populate_obj(new_mfw)
-        new_mfw.creator_id = user_id
+    if request.method == "POST": #and mfwForm.validate():
+        mfw = MFW()
+        mfwForm.populate_obj(mfw)
+        mfw.creator_id = user_id
         duplicate_mfw = session.query(MFW).\
-                                filter_by(name = new_mfw.name).\
+                                filter_by(name = mfw.name).\
                                 first()
         if duplicate_mfw:
-            flash("The name "+new_mfw.name+" already exists.")
-            return redirect(url_for("mfw_create", form=form))
+            flash("The name "+mfw.name+" already exists.")
+            return redirect(url_for("mfw_create", form=mfwForm))
         try:
             uploaded_image = upload_image(request.files['image_file'])
         except:
             uploaded_image = False
-        if uploaded_image: new_mfw.image_url = uploaded_image
+        if uploaded_image: mfw.image_url = uploaded_image
 
-        category_names = str(request.form['category']).split(",")
-        for category_name in category_names:
-            category_name = category_name.strip()
-            if not ((category_name == None) or (category_name == "")):
-                existing_category = session.query(Category).\
-                                            filter_by(name = category_name).\
-                                            first()
-                if existing_category:
-                    new_mfw.categories.append(existing_category)
-                else:
-                    new_category = Category( name=category_name,
-                                             creator_id=user_id )
-                    new_mfw.categories.append(new_category)
-        session.add( new_mfw )
+        mfw = parse_categories(mfw, request.form['category'])
+        session.add( mfw )
         session.commit()
-        new_elements = []
+
+        # add elements to mfw object from numbered element form fields
         i = 0
         while i < 20:
             try:
-                new_elements.append(
-                  { 'letter':      request.form['element'+str(i)+'-letter'],
-                    'description': request.form['element'+str(i)+'-description'],
-                    'order':       i
-                  })
+                element = Element(
+                    letter = request.form['element'+str(i)+'-letter'],
+                    description = request.form['element'+str(i)+'-description'],
+                    order =       i,
+                    mfw_id = mfw.id
+                    )
+                session.add(element)
                 i = i + 1
             except:
                 break
-
-        for new_element in new_elements:
-            element = Element( letter=new_element['letter'],
-                               description=new_element['description'],
-                               order=new_element['order'],
-                               mfw_id=new_mfw.id )
-            session.add(element)
         session.commit()
-        flash( "new MFW '" + new_mfw.name + "' created!" )
-        print "\nnew_mfw POST triggered, name is: ", new_mfw.name
+        flash( "new MFW '" + mfw.name + "' created!" )
+        print "\nmfw POST triggered, name is: ", mfw.name
         return redirect(url_for("mfw_browse"))
 
     else:
         return render_template( 'mfw_create.html',
-                                form=form,
+                                mfwForm = mfwForm,
                                 category_name = category_name )
 
 
@@ -124,12 +108,28 @@ def mfw_edit(mfw_id):
     mfwForm = MFWForm( request.form, mfw )
     elementForms = []
     for element in mfw.elements:
-        elementForms.append(ElementForm( request.form, element ))
+        elementForm = ElementForm( None , element )
+        elementForms.append(elementForm)
 
     if request.method == "POST":
         print "\nmfw_edit POST triggered, name is: ", mfwForm.name.data
         old_name = mfw.name
         mfwForm.populate_obj(mfw)
+
+        # populate elements of the mfw object from numbered element form fields
+        i = 0
+        while i < 20:
+            try:
+                elementForm = ElementForm(
+                    id = int(request.form['element'+str(i)+'-id']),
+                    letter = request.form['element'+str(i)+'-letter'],
+                    description = request.form['element'+str(i)+'-description'],
+                    order =       i
+                    )
+                elementForm.populate_obj(mfw.elements[i])
+                i = i + 1
+            except:
+                break
 
         try:
             edited_image_file = upload_image(request.files['edited_image_file'])
@@ -137,30 +137,19 @@ def mfw_edit(mfw_id):
             edited_image_file = False
         if edited_image_file: mfw.image_url = edited_image_file
 
-        # TODO: refactor and functionalize below category mumbojumbo
-        edited_category_names = str(request.form['edited_categories']).split(",")
-        if edited_category_names:
-            for edited_category_name in edited_category_names:
-                edited_category_name = edited_category_name.strip()
-                if not ((edited_category_name == None) or (edited_category_name == "")):
-                    existing_category = session.query(Category).\
-                                                filter_by(name = edited_category_name).\
-                                                first()
-                    if existing_category:
-                        mfw.categories.append(existing_category)
-                else:
-                    category = Category( name=edited_category_name,
-                                         creator_id=user_id )
-                    mfw.categories.append(category)
+        mfw = parse_categories(mfw, request.form['edited_categories'])
 
+        session.add(mfw)
         session.commit()
         flash( "item '" +  old_name + "' edited to '" + mfw.name + "'. Jawohl!")
         return redirect( url_for("mfw_view", mfw_id=mfw_id) )
 
     else:
+        # prep 'categories' field and serve page
         category_names = ""
         for category in mfw.categories:
-            category_names = category_names + category.name + ", "
+            if category_names == "": category_names = category.name
+            category_names = category_names + ", " + category.name
         return render_template( 'mfw_edit.html',
                                 mfwForm = mfwForm,
                                 elementForms = elementForms,
@@ -189,3 +178,31 @@ def mfw_delete(mfw_id):
     else:
         print "/id/delete accessed..."
         return render_template( "mfw_delete.html", mfw = mfw )
+
+
+def parse_categories(mfw, category_names):
+    """ * parse 'categories' form field by proper splitting and stripping.
+        * checks if each category already exists.
+        * if it doesn not exist, create new category in session.
+        * append category to mfw. """
+
+    user_id = getUserId( flask_session['email'],
+                         flask_session['google_plus_id'] )
+
+    category_names = str(category_names).split(",")
+    for category_name in category_names:
+        category_name = category_name.strip()
+        if not ((category_name == None) or (category_name == "")):
+            existing_category = session.query(Category).\
+                                    filter_by(name = category_name).\
+                                    first()
+            try:
+                if existing_category:
+                    mfw.categories.append(existing_category)
+                else:
+                    new_category = Category( name=category_name,
+                                         creator_id=user_id )
+                    mfw.categories.append(new_category)
+            except:
+                mfw.categories.append(existing_category)
+    return mfw

@@ -57,12 +57,12 @@
       <form id='new-mfw-form' class='form-horizontal' role='form' action = {{ url_for("mfw_create") }} method="POST" enctype="multipart/form-data">
         <div class='form-group'>
           <div class='col-xs-12'>
-            {{form.name(placeholder=form.name.label.text, id="mfw_name", class_="form-control form-control-large margin-bottom-sm")}}
+            {{mfwForm.name(placeholder=mfwForm.name.label.text, id="mfw_name", class_="form-control form-control-large margin-bottom-sm")}}
           </div>
         </div>
         <div class='form-group'>
           <div class='col-xs-12'>
-            {{form.description(placeholder=form.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+            {{mfwForm.description(placeholder=mfwForm.description.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
         <div id='element-group'>
@@ -78,13 +78,13 @@
             <input name="image_file" class="margin-bottom-sm" type="file">
           </div>
           <div class='col-xs-12'>
-            {{form.image_url(placeholder=form.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+            {{mfwForm.image_url(placeholder=mfwForm.image_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
 
         <div class='form-group'>
           <div class='col-xs-12'>
-            {{form.reference_url( placeholder=form.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
+            {{mfwForm.reference_url( placeholder=mfwForm.reference_url.label.text, class_="btn-block from-control form-control-medium margin-bottom-sm")}}
           </div>
         </div>
         <div class='form-group'>
