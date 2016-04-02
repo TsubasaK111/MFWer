@@ -1,9 +1,8 @@
-# M□WR (Mental Frameworker)
- Make, Share, and Present the best of your Mental Frameworks with M□WR!
-
+# M□W (Mental Framework)
  Strategic, Powerful, Beautiful.
+ Make, Share, and Present the best of your Mental Frameworks with M□W!*
 
- Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
+ *Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
 
 ##Installation:
  1. **Install all requirements.**
