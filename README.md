@@ -1,6 +1,6 @@
 # M□W (Mental Framework)
- Strategic, Powerful, Beautiful.
- Make, Share, and Present the best of your Mental Frameworks with M□W!*
+ Strategic, Powerful, Beautiful.<br>
+ Make, Share, and Present the best of your Mental Frameworks with M□W!*<br>
 
  *Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
 

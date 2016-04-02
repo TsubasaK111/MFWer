@@ -6,13 +6,13 @@
 
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-8">
+		<div class="col-xs-9">
 			<div class='landing-punchline'>
 					<h1>
 						Strategic. Powerful. Beautiful.
 					</h1>
 					<h2>
-						Make, Share, and Present the best of your Mental Frameworks
+						Make, Share, and Present the best of your Mental Frameworks<el class="fine-text">*</el>
 					</h2>
 			</div>
 
@@ -37,9 +37,16 @@
 			</div>
 
       {% include "flash.html" %}
-      
 		</div>
-		<div class='col-xs-3'></div>
+		<div class='col-xs-2'></div>
 	</div>
 
+{% endblock %}
+
+{% block footer %}
+<div class="row">
+   <div class="col-xs-12 fine-text margin-bottom">
+     * Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
+   </div>
+</div>
 {% endblock %}
