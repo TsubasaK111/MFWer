@@ -29,3 +29,6 @@ This repo is distributed under the <a href="http://opensource.org/licenses/MIT">
 
 ##Todo:
  * Make MFW_update page fully functional
+ * Implement Facebook OAuth backend
+ * Maybe an automatic image search/scraper?
+ * Refactor repetitive login/owner verification in routes with function decorators
