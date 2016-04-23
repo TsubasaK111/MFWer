@@ -117,12 +117,3 @@ DatabaseSession = sessionmaker(bind = engine)
 
 
 session = DatabaseSession()
-
-
-# def after_attach(session, instance):
-#     """ flush session (commit all changes to the SQL db)
-#         whenever a 'category' is added. """
-#     logging.info( "\nnew attach! instance is: ", instance )
-#     logging.info( "Session.new is: ", session.new )
-#     if instance.__tablename__ == "shelter":
-#         session.flush()

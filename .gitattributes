@@ -1,0 +1,7 @@
+*.py linguist-language=Python
+
+*/animate.css linguist-vendored=false
+*/bootstrap-theme.min.css linguist-vendored=false
+*/bootstrap.min.css linguist-vendored=false
+
+*/templates/* linguist-vendored=false
