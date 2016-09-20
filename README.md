@@ -27,8 +27,6 @@ and `vagrant up`.)
 ##License:
 This repo is distributed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
 
-##Todo:
- * Make MFW_update page fully functional
- * Implement Facebook OAuth backend
- * Maybe an automatic image search/scraper?
- * Refactor repetitive login/owner verification in routes with function decorators
+##Contributing:
+If you want to contribute, you should know in advance that you're awesome!  
+Feel free to take any of the [![Stories in Ready](https://badge.waffle.io/TsubasaK111/MFW.png?label=ready&title=Ready)](https://waffle.io/TsubasaK111/MFW) issues^^
