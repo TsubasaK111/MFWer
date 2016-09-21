@@ -2,21 +2,26 @@
 
 All core requirements for MFW must be documented as epics and user stories.  
 This is because we want everything that we develop to have a clear purpose and value to the user.
+Anyone can draft an user story.
 
 ## User Story Format
 
 User stories will be organized as github issues with the 'user story' tag.
+
+![an user story issue](images/user-story-issue.png)
 
 User stories must include:
 * A Value Statement
 * A Discussion with the dev team
 * A Definition of Done
 
-**Issue: {user-story-function-statement}**
+**Title: {user-story-function-statement}**
 ```markdown
-# {user-story-function-statement}
-
 ## Epic:
+ As a {user type},  
+ I can {function},  
+ So that {benefit}.
+
 See [{Epic-filename}]({full-url-to-epic-file})
 
 ## Value Statement:
@@ -51,12 +56,12 @@ Epics are larger, more general stories.
 They are placed above user stories,  
 and describe the purpose of the project itself.
 
-They will be organized as markdown docs in the `/docs/epics` directory,
-and should be written as such:
+They will be organized as markdown files in the `/docs/epics` directory,  
+and should be written like this:
 
 **{user-type}-Epics.md:**
 ```markdown
-# {user-type} Epics
+# {user type} Epics
 
 ## The Super Epic
 
