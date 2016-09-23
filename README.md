@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/TsubasaK111/MFW.png?label=ready&title=Ready)](https://waffle.io/TsubasaK111/MFW)
 # M□W (Mental Framework)
  Strategic, Powerful, Beautiful.<br>
  Make, Share, and Present the best of your Mental Frameworks with M□W!*<br>
