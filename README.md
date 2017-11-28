@@ -13,11 +13,11 @@
  7. Dones^^
 
 ## Requirements:
- * <a href="https://www.python.org/downloads/">Python2</a>
- * Flask
- * WTForms
- * <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>
- * <a href="https://sqlite.org">SQLite3</a>
+ - <a href="https://www.python.org/downloads/">Python2</a>
+ - Flask
+ - WTForms
+ - <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>
+ - <a href="https://sqlite.org">SQLite3</a>
 
 <br>
 <br>(_Alternatively_, if you run vagrant and git, you can just:<br>
