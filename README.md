@@ -13,11 +13,11 @@
  7. Dones^^
 
 ## Requirements:
- - <a href="https://www.python.org/downloads/">Python2</a>
+ - [Python2](https://www.python.org/downloads/)
  - Flask
  - WTForms
- - <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>
- - <a href="https://sqlite.org">SQLite3</a>
+ - [SQLAlchemy](http://www.sqlalchemy.org/)
+ - [SQLite3](https://sqlite.org)
 
 <br>
 <br>(_Alternatively_, if you run vagrant and git, you can just:<br>
@@ -25,7 +25,7 @@
 and `vagrant up`.)
 
 ## License:
-This repo is distributed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
+This repo is distributed under the [MIT License](http://opensource.org/licenses/MIT).
 
 ## Contributing:
 If you want to contribute, you should know in advance that you're awesome!  
