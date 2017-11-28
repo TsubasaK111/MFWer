@@ -4,7 +4,7 @@
 
  *Mental Frameworks are mnemonics that describe a process, and serve a time-critical purpose.
 
-##Installation:
+## Installation:
  1. **Install all requirements.**
  2. Download the contents of this repo.
  3. Open command prompt.
@@ -12,7 +12,7 @@
  6. Access http://localhost:5001/
  7. Dones^^
 
-##Requirements:
+## Requirements:
  * <a href="https://www.python.org/downloads/">Python2</a>
  * Flask
  * WTForms
@@ -24,9 +24,9 @@
 `git clone https://github.com/udacity/fullstack-nanodegree-vm.git fullstack`<br>
 and `vagrant up`.)
 
-##License:
+## License:
 This repo is distributed under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
 
-##Contributing:
+## Contributing:
 If you want to contribute, you should know in advance that you're awesome!  
 Feel free to take any of the [![Stories in Ready](https://badge.waffle.io/TsubasaK111/MFW.png?label=ready&title=Ready)](https://waffle.io/TsubasaK111/MFW) issues^^
